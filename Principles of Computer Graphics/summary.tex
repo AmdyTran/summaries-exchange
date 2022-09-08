@@ -1,0 +1,268 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=0.8in]{geometry} 
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor   = red %Colour of citations
+}
+
+\usepackage{algorithm2e}
+
+
+\usepackage{tcolorbox}
+
+ 
+\newtheorem{theorem}{Satz}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Beweis]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Principles of Computer Graphics - Summary}%replace X with the appropriate number
+\author{Andy Tràn}
+ 
+\maketitle %shows the current date of the Zusammenfassung
+
+This will be a very personalised summary for me to use to study for the course Principles of Computer Graphics (CSCI3260). It might be complete, it might not be, it will probably not be. For questions you can refer to \href{mailto:andtran@ethz.ch}{andtran@ethz.ch}. This summary is based of the lecture notes and should be used as a supplement to the lectures. 
+
+\tableofcontents
+
+\newpage
+
+\section{Lecture 1 - 06/09/2022: Introduction, Display and Colour}
+\subsection{Important organizational stuff}
+\begin{itemize}
+    \item \href{mailto:pheng@cse.cuhk.edu.hk}{pheng@cse.cuhk.edu.hk}, office hours: Thursday 2:30 PM - 4:30 PM, SHB 929
+    \item \textbf{Lecture hours:}  Tuesday 10:30 am - 12:15 pm, Thursday 11:30 am - 12:15 PM
+    \item \textbf{Tutorial hours}: Monday 3:30 pm - 4:15 pm, Thursday 5:30 pm - 6:15 pm 
+    \item \textbf{Reference book}: Fundamentals of Computer Graphics by Peter Shirley (not necessary), OpenGL Programming Guide
+    \item \textbf{Course}: Consists of three parts: introduction, basics in graphics, more about graphics 
+    \item \textbf{Grading}: (2) programming assignments 0.25, course project 0.20, mid-term exam 0.25, final exam 0.30
+    \item \textbf{Release}: Assignment 1 - release 12/9, deadline 02/10, assignment 2 - release 3/10, deadline 30/10, course project - release 31/10, deadline 27/11, mid-term exam 18/10 10:30 - 12:15
+\end{itemize}
+
+\subsection{Display and Colour}
+Lecture Outline
+\begin{itemize}
+    \item Display Devices and Basic Terminologies
+    \item Frame Buffer (Memory to Display)
+    \item Color Space: RGB, CMY, HSV, YIQ, CIE YZ
+    \item ALpha Channel and Double Buffering
+\end{itemize}
+
+\subsubsection{Display Devices}
+\textbf{Mechanism:}  shoot electrons with varying energy through vertical and horizontal deflectors to hit spot on screen, phosphors on screen jump to excited state when hit by electrons, emit monochromatic light when they drop to rest state
+\newline
+\textbf{Random scan/Vector scan:}  give instruction and follow instruction
+\newline
+\textbf{Raster scan:}  you go in a line and activate a line, and you turn each line on, where each spot on the screen is called a pixel. You shoot the gun, at the end of the line you turn it off and go back to the start, which is called \textbf{retrace}. There is a difference between horizontal and vertical retrace, horizontal is per line, vertical for each following line.
+\newline
+\textbf{Interlacing:} trick to get less flicker out of fixed signal bandwidth, it's like doubling the framerate, for example let's say we have 30Hz, we send two signals but each with a time difference between each other. For example to line 0 we send at 0 and 1, line 1 we send at 2 and 3. 
+Result: doubling the perceived the framerate, without costing more bandwidth
+\newline
+Flat-Panel displays, two classes
+\begin{itemize}
+    \item \textbf{Nonemissive displays}: LCD (optical effects to split light)
+    \item \textbf{Emissive display}: field emission display (FED), light-emitting diode (LED), organic light-emitting diode (OLED). Which is more power efficient
+\end{itemize}
+\noindent
+On LCD: we block light instead of emitting the correct light.
+\newline
+FED: thousands of micro-electron guns
+
+\subsubsection{3D Displays overview}
+Two human visual cues used 
+\begin{itemize}
+    \item Stereopsis: seeing 2 slightly different images in each eye
+    \item Motion Parallax: seeing slighty different images as you move around
+\end{itemize}
+\noindent
+Terms used:
+\begin{itemize}
+    \item Stereoscopic: difference image to each eye, viewer must wear special glasses
+    \item Autostereoscopic: different image to each eye, does not require special glasses
+    \item Multi-view: different images depending on viewer's position
+\end{itemize}
+Note: Multi-view can be combined with used in combination of the others
+\newline
+\subsubsection{Stereoscopic and Autostereoscopic displays}
+\begin{itemize}
+    \item Stereoscopic displays (common): two approaches
+     \begin{enumerate}
+        \item using circularly polarized glasses (like in cinemas)
+        \item using active shutter glasses (requires batteries, for example 3D TVs)
+    \end{enumerate}
+    \item Autostereoscopic displays: two approaches
+    \begin{enumerate}
+        \item Lenticular lens: bright but blurry, old
+        \item Parallax barriers, darker but sharper, like Nintendo 3DS
+    \end{enumerate}
+\end{itemize}
+\noindent
+Downside of Autostereoscopic displays: usually limited to 1 or a very few viewers, and narrow sweet spot for viewing 3D.
+
+\subsubsection{Multi-view displays}
+Usually enabled by tracking the person's head.
+
+\subsection{Frame Buffer}
+Graphical storage (memory) and transformation hardware for digital images. We consider computer images as digital, we want to quantify a space into units (pixels).
+
+\subsubsection{Greyscale/Monochrome Frame Buffer}
+\begin{itemize}
+    \item Intensity of the raster scan beam is modulated according to the contents of a frame buffer
+    \item Each element of the frame buffer is associated with a single pixel on the screen
+\end{itemize}
+Each marker corresponds to a pixel on the computer screen, remember rasterizing from the beginning of this lecture
+
+\noindent
+Note: digital to analog converted (DAC)
+
+\subsubsection{Resolution}
+Determined by 
+\begin{itemize}
+    \item number of scan lines
+    \item number of pixels per scan line
+    \item number of bits per pixel
+\end{itemize}
+
+\subsubsection{Colours}
+
+\begin{itemize} 
+    \item 1 bit: B or W, 8 bit: 0 pure black to 255 pure white, with colours in between. To have true colour we need 8 bit per RGB
+    \item To produce colours we mix intensities of each colour, to have a full spectrum we need a monitor which supports 256 voltages for each colour, the description of each colour in frame buffer memory is called \textbf{channel}. The term \textbf{truecolour (24 bits)} is for systems which the frame buffer stores the values for each channel (3 channels for RGB) 
+    \item \textbf{Color table}: for few bits per pixel, we have to map non-displayable colours to displayable ones. We can remap color table entries in software. 
+\end{itemize}
+
+\subsubsection{Look Up Tables (LUT)}
+Pseudo color: assign computed values systematically to a gray or color spectrum to indicate differences, for example height, speed, etc. 
+
+\subsection{Color Space}
+\begin{enumerate}
+    \item RGB: additive color space, used for displays
+    \item CMY: subtractive color space, used for printing
+    \item HSV: (H circular, S distance from axis, V brightness), corresponds to artistic concepts of tint, shade, and tone
+    \item YIQ: (Y luminance, I orange-cyan hue, Q green-magenta hue), exploits properties of the visual system, used in TV broadcasting
+    \item XYZ system: defined in terms of three color matching functions  
+\end{enumerate}
+
+\begin{definition}[Gamut] 
+    device's range of reproducible color
+\end{definition}
+
+\subsection{Alpha Channel and Double Buffering}
+\subsubsection{Alpha Channel}
+\textbf{Idea:}  we store one color per pixel, but we get hard edges. So we introduce an alpha channel next to the RGB channel, to blend with the lower layers to smoothen it out. Can be regarded as \textbf{1 - transparency} or \textbf{opacity}. 
+
+\begin{example}[Blending]
+    We have a source and destination image, we can overlay them and the alpha value denotes of how much percentage we see each image when we overlay them
+\end{example}
+
+\subsubsection{Image Matting} 
+What part of the image we want to keep, using a mask.
+
+\subsection{Double Buffering}
+\begin{problem}
+    what happens when we write to the frame buffer while it's being displayed?
+\end{problem}
+\begin{solution}[Double-buffering]
+    \begin{enumerate}
+        \item Render to the the back buffer and swap when rendering is done
+        \item Double the memory
+    \end{enumerate}
+\end{solution}
+
+\section{Lecture 2 - 08/09/2022: Useful 2D and 3D mathematics}
+\subsection{Coordinate Systems}
+\subsubsection{2D Cartesian Reference Frames}
+There are two ways of using this system: (a) starting at the lower-left screen corner, (b) starting at the upper-left screen corner. 
+
+\subsubsection{Polar Coordinates in the XY plane}
+We start from a center, with a radial distance \textbf{r} and the angular displacement $\theta$   from the horizontal   
+\newline
+We can convert it to the cartesian system: $x = r cos \theta$ and $y = r sin \theta$ 
+\newline
+To polar system: $r = \sqrt{x^2 + y^2}$ and $ \theta = tan^{-1}(\frac{y}{x})$    
+\newline
+\textbf{Definition}: $\theta = \frac{s}{r}$, where $\theta$ is the angle subtended by the circular arc of length s and r
+\newline
+We know: $P = \frac{2\pi r}{r} = 2\pi$, total distance around P
+\subsubsection{3D cartesian reference frames}
+\textbf{Right-handed system}: %todo
+\newline 
+\textbf{Left-handed system} %todo
+\newline
+In OpenGL: right handed (common), DirectX free to choose   
+\subsubsection{Cylindrical-coordinate System}
+\begin{enumerate}
+    \item The surface of constant r is a vertical cylinder
+    \item The surface of constant $\theta$ is a vertical plane containing the Z-axis
+    \item The surface of constant z is a horizontal plane parallel to the Cartesian XY plane
+    \item Transformation from a cylindrical coordinate specification to a cartestian reference system 
+\end{enumerate}
+
+$X = r cos \theta $, $Y = r sin \theta$, $ Z = z$
+
+\subsubsection{Spherical-coordinate system}
+Which is like polar coordinate in 3D space, we have $P(r,\theta,\phi)$
+\newline
+it holds that $x = r cos \theta sin \phi$, $y= r sin \theta sin \phi$, $z r cos \zeta$    
+
+\begin{definition}[Angles in 3D] We define it as $ \omega = \frac{A}{r^2}$, total area is $\frac{4\pi r^2}{r^2} = 4\pi$ 
+
+    
+\end{definition}
+
+\subsection{Points and Vectors}
+\textbf{2D vector}:  $V = P_2 - P_1 = (V_x, V_y)$, length is defined as $\sqrt{V_x^2 + V_y^2}$, angle is $\alpha = tan^{-1}(\frac{V_y}{V_x})$ 
+\newline
+\textbf{3D vector}: V is same as 2D but with one more value, length is defined equivalently with $V_z$. We have three direction angles %todo
+
+We have the following rules
+\begin{enumerate}
+    \item Addition: $V_1 + V_2 = (V_{1x} + V_{2x}, V_{1y} + V_{2y}, V_{1z} + V_{2z})$
+    \item Scalar multiplication: $aV = (aV_x, aV_y, aV_z)$
+    \item Scalar product: $V_1 \cdot V_2 = |V_1||V_2|\cos \theta$, from there you can derive $\theta$    
+    \item Normalization: $\frac{V}{|V|}$, so its own product is 1
+    \item Perpendicular: $|A||B|\cos \theta = A \cdot B =
+     \begin{cases}
+        0 & \text{if } \theta = 90 deg\\
+        > 0 & \text{if }\theta < 90 deg\\
+        < 0 & \text{otherwise}
+    \end{cases}$  
+    \item Cross product of two 3D vectors: $V_1 \times V_2 = u |V_1||V_2|\sin \theta$, where u is the unit vector that is perpendicular to both $V_1$ and $V_2$ %TODO
+\end{enumerate}
+
+
+\end{document}

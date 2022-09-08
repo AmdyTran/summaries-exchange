@@ -1,0 +1,119 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm2e}
+
+
+\usepackage{tcolorbox}
+
+ 
+\newtheorem{theorem}{Satz}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Beweis]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Numerical Optimization - Summary}%replace X with the appropriate number
+\author{Andy Tràn}
+ 
+\maketitle %shows the current date of the Zusammenfassung
+
+This will be a very personalised summary for me to use to study for the course Numerical Optimization (AIST 3010). It might be complete, it might not be, it will probably not be. For questions you can refer to \href{mailto:andtran@ethz.ch}{andtran@ethz.ch}. This summary is based of the lecture notes and should be used as a supplement to the lectures. 
+
+\tableofcontents
+
+\newpage
+
+\section{Lecture 1 - 05/09/2022: Introduction to Optimization}
+\begin{itemize}
+    \item \textbf{Main lecture}: Monday 12:30 - 2:15, Wednesday 5:30 -6:15 (only ESTR3112)
+    \item \textbf{Tutorial lecture}: Wednesday 4:30-5:15
+    \item \textbf{Prereq}: Multivariable calculus, linear algebra
+    \item \textbf{Course materials:} Homework and exam questions solely based on lecture notes.
+    \item \textbf{Email}: farnia@cse.cuhk.edu.hk
+    \item \textbf{Office Hour}: Tuesday 2-3 pm, SHB Building, Office 918
+    \item \textbf{Learning goals:}  \begin{enumerate}
+        \item Formulating optimization problems belonging to standard optimization categories for engineering and AI tasks
+        \item Applying standard optimization algorithms to solve linear and convex programming tasks
+        \item Implementing standard optimization algorithms over Python
+    \end{enumerate}
+    \item \textbf{Grading}: Homework 0.20, midterm 0.30, final .50, participation additionally 0.05 
+\end{itemize}
+
+\section{Tutorial 1 - 07/09/2022: Introduction to Optimization}
+\begin{example}[Transportation problem] we want to minimize the total cost of transporting a commodity from m factories to n stores. We have to following constraints: 
+    \begin{itemize}
+        \item factory i can supply at most $a_i$ units of the commodity
+        \item store j needs at least $b_j$ units of commodity
+        \item the cost of shipping from factory i to store j is $c_{i,j}$ per unit   
+    \end{itemize}
+
+    We get the following system
+
+    \begin{itemize}
+        \item Optimization variables: $x_{i,j}$, the amount of units from fac i to store j
+        \item Objective function: $\sum_{i,j}c_{i,j}x_{i,j}$
+        \item Constraint function: $\sum_{i}x_{i,j} \leq a_i$, $\sum_{j}x_{i,j} \geq b_j,$, $x_{i,j}\geq 0 $   
+    \end{itemize}
+\end{example}
+For above problem, there is no analytical solution, only an interative solution.
+
+\begin{example}[Manufacturing task] we want to maximize the profit of producing n products from m raw materials, given that
+    \begin{itemize}
+        \item We have a profit of $c_i$ per unit of Product i
+        \item We have $b_j$ available units of raw material j
+        \item We need $a_{i,j}$ units of raw material j for manufacturing one unit of i
+    \end{itemize}
+    We get the following system
+    \begin{itemize}
+        \item Optimization variable: $x_i$, amount of units per product i
+        \item Objective function: $\sum_{i}c_i x_i$
+        \item Constraint function: $\sum_i x_i a_{i,j} \leq b_j$ for all j   
+    \end{itemize}
+\end{example}
+Obviously you have to define what the allowed values are for i and j, which is left as an exercise to the reader.
+
+\begin{example}[Sorting task] given real numbers $c_1, ..., c_n \in \mathbb{R}$ we want to find the k smallest numbers
+\begin{itemize}
+    \item Optimization variable: For every $1 \leq i \leq n, x_i = \begin{cases}
+        1 & \text{if $c_i$ is among the smallest k} \\
+        0 & \text{otherwise}
+    \end{cases}$ 
+    \item Objective function: $\sum_i^n = x_i c_i$
+    \item Constraint function: $\sum_i^n x_i = k$, $x_i(1-x_i) = 0$ for all i  
+    
+\end{itemize} 
+    
+\end{example}
+\end{document}

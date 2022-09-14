@@ -261,8 +261,94 @@ We have the following rules
         > 0 & \text{if }\theta < 90 deg\\
         < 0 & \text{otherwise}
     \end{cases}$  
-    \item Cross product of two 3D vectors: $V_1 \times V_2 = u |V_1||V_2|\sin \theta$, where u is the unit vector that is perpendicular to both $V_1$ and $V_2$ %TODO
+    \item Cross product of two 3D vectors: $V_1 \times V_2 = u |V_1||V_2|\sin \theta$, where u is the unit vector that is perpendicular to both $V_1$ and $V_2$ %TODO\
+    \item Basis vectors: we can specify the coordinate axes in any reference frame with a set of vectors, one for each axis
 \end{enumerate}
+
+\section{Lecture 3 - 13/09/2022}
+\textit{Continuation of previous lecture}
+Properties of cross product
+\newline
+\begin{itemize}
+    \item Anti-commutative: $V_1 \times V_2 = -(V_2 \times V_1)$
+    \item Non-associative: $V_1 \times (V_2 \times V_3) \neq (V_1 \times V_2) \times V_3$
+    \item Distributive: $V_1 \times (V_2 + V_3) = (V_1 \times V_2) + (V_1 \times V_3)$   
+\end{itemize}
+
+\subsection{Useful 2D mathematics}
+\begin{enumerate}
+    \item Distance from P to line AB: \begin{itemize}
+        \item Find line direction: $v = (x_2 - x_1, y_2 - y_1) = (d_x , d_y)$
+        \item Find normal of line by swapping elements in v: $ n = (-d_y, d_x) = (y_1 - y_2, x_2 - x_1)$ 
+        \item Normalize n and v as $\hat{n}, \hat{v}$  
+        \item Use dot product to find h and l: $h = |(P-A) \cdot \hat{n}$, $l = (P - A) \cdot \hat{v}$  
+        \item Need to check l against length of AB
+        \item If $l < 0$ or $l > |AB|$, compute point-point distance  
+    \end{itemize}
+    \item Line-Line intersection: \begin{itemize}
+        \item Express as parametric forms: $AB: (x_1, y_1) + t_{AB} (x_2 - x_1, y_2 - y_1)$ , $CD: (x_3, y_3) + t_{AB} (x_4 - x_3, y_4 - y_3)$ and set them both equal
+        \item If no solution, that meas they are parallel
+        \item Substitute back to the parametric form
+    \end{itemize}
+    \item Which-side test: given a point and a line, 
+    Calculate %TODO
+    \item Area of arbritrary polygons: polygon area $\frac{1}{2} \sum det ...$ %TODO
+    \item Inside-outside test: \begin{itemize}
+        \item Method 1: repeat the which-side test for each edge in order (only works for convex polygons)
+        \item Method 2:Odd-intersection count, side =  $\begin{cases}
+            \text{outside}, & number \equiv_2 0\\
+            \text{inside}, & \text{otherwise}
+        \end{cases}$
+    \end{itemize}
+    \item Linear Interpolation %TODO
+    \item Barycentric coordinate: by means of area ratios %TODO
+    \item Spherical linear interpolation %TODO
+    \item Normal of a triangle %TODO
+    \item Approximate normal at a vertex (vertex normal vs face normal): average the face normals of neighboring faces    
+\end{enumerate}
+
+\subsection{sth} %TODO
+Properties
+\begin{itemize}
+    \item No fixed points under translation: all points move
+    \item Multiple translations are order-independent, since addition is commutative 
+\end{itemize}
+
+\subsubsection{2D scaling}
+Properties
+\begin{itemize}
+    \item Origin fixed: $x' = 0$ if $x=0$
+    \item Order independent: $x'' = x' \cdot S_x' = x \cdot S_x \cdot S_x\  = x \cdot S_x' \cdot S_x$   
+\end{itemize}
+Single out \textit{arbitrary fixed point scaling} at $(x_0, y_0)$ as follows:
+\begin{align*}
+    x' &= x\cdot S_X + (1-S_x)x_0 \\
+    y' &= y\cdot S_y  + (1-S_y)y_0
+\end{align*} 
+
+Rotate by $\theta$:
+\begin{align*}
+    x'&= r \cos (\theta + \phi) = r \cos \phi \cos \theta - r \sin \phi \sin \theta\\
+    y' &= r \sin (\theta + \phi) = r \sin \phi \cos \theta + r \cos \phi \sin \theta
+\end{align*} 
+Multiple 2D rotations are order-independent
+Fixed-point: origin dependent
+\subsubsection{Other 2D transformations}
+\begin{itemize}
+    \item Reflection (about X/Y - axis): not equal to a rotation, except when reflecting over x and y, then it's a rotation
+\end{itemize}
+2D shearing: order dependent %TODO
+
+\subsection{Matrix operations} %TODO need to check how to write matrixes quickly and easily slide 50
+
+%TODO blablalba
+
+\subsubsection{Homogenous representations}
+\begin{enumerate}
+    \item Translation cannot be represented using $2 x 2$  matrices and homogenous coordinates help
+    \item We are left-multiplying the matrix on the vector/point 
+\end{enumerate}
+
 
 
 \end{document}

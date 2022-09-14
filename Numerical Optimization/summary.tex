@@ -116,4 +116,48 @@ Obviously you have to define what the allowed values are for i and j, which is l
 \end{itemize} 
     
 \end{example}
+
+\section{Tutorial 2 -  14/09/2022: Vectors}
+\subsection{Vectors}
+A vector $ x= [x_1, ..., x_n]$ is a collection of numbers, arranged in a column or a row, which can be thought of as the coordinates of a point in a n-dimensional space. 
+\begin{itemize}
+    \item Addition: is defined elementwise, given the dimensions are the same
+    \item Scalar product: element wise multiplication with a scalar.
+\end{itemize}
+
+Note: we by default assume a vector follows a column-representation, with real values. For row format we can just transpose. 
+
+\begin{definition}[Linearly independent]
+    Given we have n vectors, we call them l.i. when $c_1 x_1 + ... + c_n x_n = 0$ only has one solution, namely all $c_1, ..., c_n = 0$
+\end{definition}
+
+\begin{definition}[Basis]
+    For a subspace $S \in \mathbb{R}^d$, is a set of l.i. vectors $B = [x_1, ..., x_m]$ such that every vector $x \in S$ is a linear combination of the vectors in B.   \newline
+    Standardbasis: defined where $0 \leq i \leq m$, where i'th coordinate of $e_i \in S_b$ is 1 and all the others 0.  
+\end{definition}
+
+\begin{definition}[Euclidean length]
+    $x : = \sqrt{x_1^2 + ... + x_n^2}$ 
+\end{definition}
+
+\begin{definition}[Norm function] Properties of a norm function
+    \begin{enumerate}
+        \item $||x|| \geq 0$, equal to 0 only when $x = 0$
+        \item For every $c\in \mathbb{R}, ||cx|| = |c|||x||$
+        \item For every $x, y \in \mathbb{R}^d, ||x+y|| \leq ||x|| + ||y||$    
+    \end{enumerate}
+    
+    
+\end{definition}
+
+\begin{definition}[$l_p$-norm ]
+    For every $ p \geq 1 $ we define $l_p$ norm $|| \cdot ||_p : \mathbb{R}^d \to \mathbb{R}$ as $||x||_p = (|x_1|^p + ... |x_n|^p)^\frac{1}{p}$    
+    
+\end{definition}
+Note: $l_\infty = \underset{1 \leq i \leq d}{\max}x_i$ 
+\newline
+Theorem: $l_p-norms$ are decreasing in $ p \geq 1$, so
+\[
+1 \leq p \leq q \leq \infty \Rightarrow ||x||_p \geq ||x||_q
+.\]    
 \end{document}

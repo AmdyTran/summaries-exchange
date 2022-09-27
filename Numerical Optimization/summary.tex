@@ -118,7 +118,7 @@ Obviously you have to define what the allowed values are for i and j, which is l
 \end{example}
 
 \section{Tutorial 2 -  14/09/2022: Vectors}
-\subsection{Vectors}
+\subsection*{Vectors}
 A vector $ x= [x_1, ..., x_n]$ is a collection of numbers, arranged in a column or a row, which can be thought of as the coordinates of a point in a n-dimensional space. 
 \begin{itemize}
     \item Addition: is defined elementwise, given the dimensions are the same
@@ -159,5 +159,279 @@ Note: $l_\infty = \underset{1 \leq i \leq d}{\max}x_i$
 Theorem: $l_p-norms$ are decreasing in $ p \geq 1$, so
 \[
 1 \leq p \leq q \leq \infty \Rightarrow ||x||_p \geq ||x||_q
-.\]    
+.\]   
+
+\begin{definition}[Inner Product]
+    For every $ x = [x_1, ..., x_n], y = [y_1, ..., y_n ]$ we define their inner product $<x, y> = \sum_i^n x_i y_i = x^ty$  
+\end{definition}
+
+\section{Lecture 2, Part 2 - 19/09/2022: Vectors and Matrices}
+\begin{theorem}Cauchy-Schwarz Inequality
+    For two vectors $\textbf{x} $ and $\textbf{y} $, the following inequality holds:
+    \[
+    |<\textbf{x} ,\textbf{y} >| \leq ||\textbf{x} ||||\textbf{y} ||
+    .\]    
+\end{theorem}
+
+\begin{theorem}Angle between two vectors
+    We can calculate the angle between to vectors namely, \[
+    \cos \theta = \frac{<\textbf{x},\textbf{y}>}{||\textbf{x}||||\textbf{y} || }
+    .\] 
+    
+\end{theorem}
+They are orthogonal when the scalar product is 0, they are aligned the same or opposite position when the angle is 0 or 180 degrees.
+
+\begin{definition}[Mutual Orthogonal Vectors] a group of vectos $x^{(1)}, ..., x^{(k)}$ 
+    For all $i \neq j: <x^{(i)}, x^{(j)>} = 0$ 
+    
+\end{definition}
+
+\begin{proposition}[Mutual Orthogonality implies linear independence]
+    A set of mutually orthogonal vectors are linearly independent
+    
+\end{proposition}
+
+A collection of vectors are called orthogonal if they have unit euclidean length and are mutually orthogonal\dots
+
+%TODO missed something page 8
+
+\subsection*{Vectors in Optimization problems}
+From the future on we write an optimization problem as follows:
+\[
+\underset{\textbf{x} }{min} f(\textbf{x}
+\newline \text{subject to}
+g_1(\textbf{x} ) \leq 0 
+\newline
+\dots
+\newline
+g_n(\textbf{x} ) \leq 0 
+.\] 
+
+\subsection*{Matrix}
+A matrix $A \in \mathbb{R}^{m\times n}$ is a two-dimensional array of numbers
+$\begin{bmatrix} a_{1,1} & a_{2,1} & \dots & a_{m,1}\\
+    a_{1,2} & a_{2,2} & \dots & a_{m,2}\\
+    . & . & . \\
+    a_{1,n} & a_{2,n} & \dots & a_{m,n}
+
+\end{bmatrix} $  
+
+The product of two matrix $A \in \mathbb{R}^{m\times n}, B \in \mathbb{R}^{n\times t}$ is defined as
+\[
+[AB]_{i,j} = \sum_{k=1}^{n} a_{i,k}b_{k,j}
+.\]  
+
+\begin{itemize}
+    \item \textbf{The identity matrix} $I_{n}$  is defined as an $n \times n$ matrix with the diagonal being 1 and all other elements being 0.
+    \item \textbf{Matrix vector product} is the same as matrix multiplication, but t being 1
+    \item \textbf{Range of Matrix}: $\mathcal{R}(A)$ the subspace of all vectors following from linear combinations of A's combinations
+    \item \textbf{Rank of matrix}: $Rank(A)$ the dimension of subspace $\mathcal{R}(A)$  
+    \item \textbf{Full-rank matrix}: $Rank(A_{m\times n}) \leq min(m,n)$ and a matrix is full rank if $Rank(A_{m\times n}) = min(m,n)$
+    \item \textbf{Null-space}: $\mathcal{N}(A)$: the subspace of all vectors which A maps to 0. $\{\textbf{x}: A\textbf{x} = \textbf{0} \} $  
+    \item \textbf{Determinant}: $det(A) = \sum_{j}^{n} (-1)^{i+j}a_{i,j}det(A_{(i,j)})$  
+\end{itemize}
+
+Rules about determinant for square matrices:
+$det(A) = \begin{cases}
+    n, & \text{when regular}\\
+    0, & \text{otherwise}
+\end{cases}$
+
+\begin{definition}[Invertible matrices] we call a square matrix $A_{n\times n}$ invertible when a matrix exists such that 
+    \[
+    A^{-1}A = I_n \text{or} AA^{-1}
+    .\]    holds
+    
+\end{definition}
+
+\begin{proposition}[Non-singular matrices] Following propositions are equivalent.
+    \begin{enumerate}
+        \item A is invertible
+        \item A is non-singular, i.e $det(A)\neq 0$
+        \item A is full rank, i.e $Rank(A) = n$
+        \item A has linearly  independent rows or columns
+        \item A has zero null subspace
+        \item A has %TODO page 16  
+    \end{enumerate}
+\end{proposition}
+
+\subsection*{Basic identities}
+\begin{itemize}
+    \item $(A^T)^{-1} = (A^{-1})^T$
+    \item $(AB)^T = B^TA^T$
+    \item $(AB)^{-1} = B^{-1}A^{-1}$
+    \item $det(A^T) = det(A)$
+    \item $det(A^{-1}) = \frac{1}{det(A)}$
+    \item empty %TODO     
+\end{itemize}
+
+\subsection*{Eigenvalues and Eigenvectors}
+\begin{definition}[Eigenvector and eigenvalues]
+    We call a non-zero vector $\textbf{v} \neq \textbf{0}$ an eigenvector of a matrix $A_{n\times n}$ if for a coefficient $\lambda$
+    \[
+    A\textbf{v} = \lambda\textbf{v}  
+    .\]    
+\end{definition}
+\begin{enumerate}
+    \item Eigenvalues can be characterized as the solutions for $det(A- \lambda I) = 0$
+    \item Every $A\in \mathbb{R}^{n\times n}$ has n eigenvalues $\lambda_1, ..., \lambda_n$ counting multiplicities
+    \item All eigenvalues of a symmetric matrix are real numbers and can be sorted as $\lambda_1 \geq ... \geq \lambda_n$    
+\end{enumerate}
+
+\begin{proposition}[Determinant and eigenvalues]
+    $det(A) = \lambda_1 \lambda_2 ... \lambda_n$ and so A is invertible $\Leftrightarrow$ all its eigenvalues are non-zero.  
+\end{proposition}
+
+\begin{proposition}[Eigenvectors of symmetric matrices]
+    Supposed $v_1$ and $v_2$ are two eigenvectors of a symmetric matri xA for different eigenvalues $\lambda_1 \neq \lambda_2$ then
+    \[
+    v_1 \perp v_2 \text{ i.e. } v_1^T v_2 = 0
+    .\]    
+    
+\end{proposition}
+
+\begin{theorem}[Spectral theoren]
+    For a symmetric matrix A, the set of mutual orthogonal eigenvectors $v_1, ..., v_n$ corresponding to A's eigenvalues $\lambda_1, ..., \lambda_n$. In addition if $v_1, ..., v_n$ are normalized and have unit norm, then
+    \[
+    A = \sum_{i=1}^{n} \lambda_i v_i v_i^T = V \Lambda V^T  
+    .\], where $V = [v_1 | v_2 | ... | v_n]$, $\Lambda = diag(\lambda_1, ..., \lambda_n)$ 
+    
+\end{theorem}
+
+\begin{example}Spectral decomposition for the following matrix
+    $\begin{bmatrix} 1 & 2 \\ 2 & 1 \end{bmatrix}$, calculating $det(A -\lambda I) \overset{!}{=} \lambda_1 = -1, \lambda_2 = 3$ and the eigenvectors result in $v_1 = [\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}]$, $v_2 = [\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}]$   
+\end{example}
+
+\begin{definition}[Positive semi-definite matrix]
+    A symmetric matrix A is called positive semi-definite (PSD) if for every vector $\textbf{x} \in \mathbb{R}^n $ we have 
+    \[
+    x^t A x \geq 0
+    .\]
+    positive definite when the above equality holds strictly for $\textbf{x}  \neq 0$ 
+    
+\end{definition}
+
+\begin{theorem}[Eigenvalues and PSD matrix] Following propositions are equivalent
+    \begin{itemize}
+        \item A is positive semi-definite
+        \item A's eigenvalues are all non-negative
+        \item For a matrix H we have $ A = H H^T$ 
+    \end{itemize}
+\end{theorem}
+
+\subsection*{Ordering positive smei-definite matrices}
+\begin{definition}[Partial order for Matrices] for two square matrices A, B we say
+    \begin{itemize}
+        \item $A\succeq B$ if A - B is a positive semidefinite matrix
+        \item $A \succ B$ if A - B is a positive definite matrix
+        \item $A \preceq B$ if A - B is a negative definite matrix
+        \item $A \prec B $ if A - B is a negative definite matrix 
+    \end{itemize}
+    Note what happens when $B = 0$ and note that $ A\nsucceq B $ does not imply $A \prec B$ %TODO page 23   
+    
+    
+\end{definition}
+
+\section{Lecture 3 - 26/09/2022: Multivariable Functions and Calculus} %TODO: give a name
+%TODO: didnt pay attention start from page 6
+
+\subsection*{Graphs and Epigraphs}
+\begin{itemize}
+    \item Consider a real-valued function $f:\mathbb{R}^n \to \mathbb{R}$, 
+    \item Graph: The set of all points $(x, f(x)) \in \mathbb{R}^{n+1}$, graph $f:=\{(x,f(x)):x\in\mathbb{R}^n \}$
+    \item Epigraph: Set of points on top of f's Graph, $epi f := \{(x,t):x\in\mathbb{R}^n, t \geq f(x)\}$
+    \item Example $f([x_1,x_2]) = x_1^2 +x_2^2$  
+\end{itemize}
+
+
+\subsection*{Contour set}
+\begin{definition}[Contour Set]
+    For a real value $t\in \mathbb{R}$ the \textbf{contour} of f is the set of vectors mapped to value t.
+    \[
+    C_f(t) = \{ \mathbf{x} \in \mathbb{R}^n: f(\mathbf{x}) = t \}
+    .\]  
+\end{definition}
+
+ \subsection*{Linear and affine functions}
+ $f: \mathbb{R}^n \to \mathbb{R}$ is called a linear function if 
+ \begin{enumerate}
+    \item For every $x,y \in \mathbb{R}^n: $ $f(x+y) = f(x) + f(y)$ 
+    \item For every $x \in \mathbb{R}^n, c\in \mathbb{R}: $ $f(cx) = c f(x)$  
+    \item $f(0) = 0$, which follows from point (2).
+    \item We call $f$ an affine function if $g(x) = f(x) - f(0)$ is a linear function   
+ \end{enumerate}
+  
+ \begin{theorem}[Linear functons and inner products]
+    Suppose that f is a linear function, then there exists a vector $a\in\mathbb{R}^n$ such that:
+    \[
+    f(\mathbf{x}) = \mathbf{a^Tx}= a_1x_1 + ... + a_nx_n
+    .\]  
+    
+ \end{theorem}
+
+ %TODO: missed something on  page 9
+
+ \subsection*{Hyperplane and Halfspaces}
+ \begin{itemize}
+    \item \textbf{Hyperplane:} a contour of a linear function, that is for a vector $\mathbf{a}\in\mathbb{R}^n$ and real number $b\in \mathbb{R}$ we define a hyperplane H as: \[
+    H = \{ \mathbf{x} \in \mathbb{R}^n: \mathbf{a}^T \mathbf{x} = b\}
+    .\]    
+    \item \textbf{Halfspace:} the space on top or bottom of a hyperplane, that is for a vector $a\in \mathbb{R}^n$ and real number $b\in \mathbb{R}$ we define halfspace $H_-$ and $H_+$ as \[
+    H_+ = \{x \in \mathbb{R}^n : a^tx \leq b\}
+    .\], conversely for $H_+$ 
+    
+ \end{itemize}
+
+ \subsection*{Quadratic functions}
+ \begin{itemize}
+    \item \textbf{Quadratic function: } a polynomial function in which the highest-degree term is of degree 2
+ \end{itemize}
+
+ \begin{definition}[General quadratic function] The following provides a general form of a quadratic function in terms of $A\in\mathbb{R}^{n\times n}, b \in \mathbb{R}^n$, and $c\in \mathbb{R}$\[
+ f(x) = \frac{1}{2}x^t Ax + b^t x + c
+ .\]   
+    
+ \end{definition}
+ 
+ \subsection*{Gradients}
+ \begin{definition}[Gradient] if f is differentiable at a point $x \in \mathbb{R}^n$, we define the gradient as
+    \[
+    \nabla f(x) = [ \frac{df(x)}{dx_1}, ..., \frac{df(x)}{dx_2}]
+    .\]  
+    
+ \end{definition} %TODO; maybe add gradient rules for vectors and matrices
+ 
+ \subsection*{Gradient used for local function approximation}
+ \begin{itemize}
+    \item In many optimization problems, we need to locally approximate the objective and constraint functions with an affine function
+    \item At every point $x_0$ the gradient $\nabla f(x_0)$ results in an affine function approximating function f around $x_0$
+    \item The approximation error is defined as $f(x) = f_{app}(x) + \epsilon(x)$  
+ \end{itemize}
+ 
+ \[
+ f(x) \approx f(x_0) + \nabla(f(x_0))^T(x-x_0)
+ .\] 
+
+ \begin{theorem}[Error of first-order taylor series expansion] Suppose that f is differentiable at $x_0$, then error $\epsilon(x)$ is vanishing near $x_0$
+    \[
+    lim_{x \to x_0} \frac{\epsilon(x)}{||x-x_0||} = 0
+    .\]    
+    
+ \end{theorem}
+
+ \subsection*{Geometric interpretation of gradients}
+ For a unit vector $\mathbf{v}$ and real $\epsilon>0$ \[
+f(x_0 + ev) \approx f(x_0) + \epsilon \nabla f(x_0)^T v
+.\]  
+\begin{itemize}
+    \item $\nabla f(x_0)^T v > 0$: increases
+    \item $\nabla f(x_0)^T v < 0$: decreases
+    \item $\nabla f(x_0)^T v = 0$: doesn't change
+\end{itemize}
+Therefore we have a maximal rate of local variation along the gradient. In contrast there is a zero rate of variation along any direction orthogonal to the gradient. This shows gradients are orthogonal to contour sets.
+
+\subsection*{Hessian}
+%TODO: fuck writing the hessian down.
+ 
+ 
 \end{document}

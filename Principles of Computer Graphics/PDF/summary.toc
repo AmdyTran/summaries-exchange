@@ -30,3 +30,14 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Other 2D transformations}{8}{subsubsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.3}Matrix operations}{9}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Homogenous representations}{9}{subsubsection.3.3.1}%
+\contentsline {section}{\numberline {4}REAL Lecture 3: Hierarchical Model}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Graphics Primitives: Points, Lines and Triangles}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Data structure: vertex list and index list}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Hierarchical structure}{9}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}View-world or Modelview transformations}{10}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Basic scenegraph concept}{10}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Lecture 4: Interactive 3D Control}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Interactive Control Concept}{11}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Interactive Translation relative to screen}{11}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Interactive rotation: rolling ball}{11}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Lecture 5: Cameras, Projections, and Clipping}{11}{section.6}%

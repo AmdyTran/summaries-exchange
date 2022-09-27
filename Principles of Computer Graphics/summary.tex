@@ -219,9 +219,9 @@ To polar system: $r = \sqrt{x^2 + y^2}$ and $ \theta = tan^{-1}(\frac{y}{x})$
 \newline
 We know: $P = \frac{2\pi r}{r} = 2\pi$, total distance around P
 \subsubsection{3D cartesian reference frames}
-\textbf{Right-handed system}: %todo
+\textbf{Right-handed system}: Take your right hand, palm towards you, thumb (positive x direction) to the right, index finger up (positive y direction), middle finger towards you (positive z direction). Yes, the back of you is positive z.
 \newline 
-\textbf{Left-handed system} %todo
+\textbf{Left-handed system}: Like RHS, but this time away from you is positive z. (Think of how to use your hand to show this)
 \newline
 In OpenGL: right handed (common), DirectX free to choose   
 \subsubsection{Cylindrical-coordinate System}
@@ -348,6 +348,149 @@ Fixed-point: origin dependent
     \item Translation cannot be represented using $2 x 2$  matrices and homogenous coordinates help
     \item We are left-multiplying the matrix on the vector/point 
 \end{enumerate}
+
+
+
+%FIX LECTURE 3
+\section{REAL Lecture 3: Hierarchical Model}
+\subsection*{Lecture Outline}
+\begin{enumerate}
+    \item Graphics Primitives: Points, Lines and Triangles
+    \item Data structure: vertex list and index list
+    \item Hierarchical Structure
+    \item View-world or Modelview transformations
+    \item Basic scenegraph concept
+\end{enumerate}
+
+\subsection{Graphics Primitives: Points, Lines and Triangles}
+
+\begin{itemize}
+    \item \textbf{Idea:} It's all about \textbf{coordinates} and \textbf{connectivity}
+    \item \textbf{Meaning:} wireframe and meshes are built up by points, lines, or triangles. We call this \textbf{tesselation/triangulation}
+    \item \textbf{Most efficient input type for rendering polygons:}  \textbf{Triangle strip} or \textbf{triangle fan}. The differences between the two is the following, triangle strip is a set of triangles which share vertices (can share different vertices), while triangle fan has one \textbf{(!)} shared center. 
+\end{itemize}
+
+%TODO: include img of TS and TF, they are in the ./img/folder   
+\subsection{Data structure: vertex list and index list}
+We have two kinds of data strucutres, namely vertex lists and index lists. 
+\begin{itemize}
+    \item \textbf{Vertex list:} you store all the vertex coordinates in one array \begin{itemize}
+        \item Benefit: sequential memory access
+        \item Negative: very likely to have duplicated vertices in the array, waste of storage
+    \end{itemize}
+    \item \textbf{Index list/Indexed Face Set:} we have two arrays, one called the \textbf{face list}. That one contains all the polygons and the corresponding vertices. While the \textbf{vertex list} contains the coordinates for each vertex. \begin{itemize}
+        \item Benefit: reuse vertices and keeps a compact vertex list
+        \item Bad: random memory accesses which lead to cache misses
+    \end{itemize}
+\end{itemize}
+
+\textit{Note:} (1) triangle strip can be implemented on either data structure, (2) in some APIs these data structures are built in, (3) indexing can start with 0 or 1.
+
+\subsection{Hierarchical structure}
+A scene is composed of the multiple objects, which are composed of subjects as well. We can create a hierarchical model and break it down. Each objects has its own polygon list and associated vertex list.
+\subsection{View-world or Modelview transformations}
+\begin{itemize}
+    \item \textbf{Idea:}  we model objects in a model space, which is pretty dumbed down in a cartesian matter where we start from the origin. (\textbf{Model space}) This usually doesn't reflect the reality and we want to model it to the common world (\textbf{World space}) and then to our eyes perspective (\textbf{Eye perspective}). 
+    \item \textbf{Example:}  we create a moon in the object space, we put it in the sky, and then we look at it. 
+    \item \textbf{Concrete:} An object is defined as $P_{obj} = (x,y,z)^T$ to get it into the world coordinates we need to transform it, namely $M_{obj2world} \times P_obj$ and to get the eye coordinates, $M_{world2eye}\times M_{obj2world} \times P_obj$.
+    \textbf{Note:} Since we usually don't care about the steps inbetween, we usually merge $M_{obj2world}$ and $M_{world2eye}$ into one matrix called the \textbf{modelview/viewworld} $M_{modelview}$.
+\end{itemize}
+
+
+Notes about the modelview Matrix $M_{modelview}$:
+\begin{itemize}
+    \item OpenGL puts the eye-point at the origin looking towards the negative z-axis
+    \item OpenGL is a state machine: it has an internal memory storage for the modelview matrix
+    \item When calling transformation operations, the kernel constructs a matrix for the transform and right multiplies it with its internal modelview matrix.
+\end{itemize} %TODO: explain what point 3 does exactly?
+
+%TODO: show to illustration from the slides, we have mv_steps.png to import
+ 
+\subsection{Basic scenegraph concept}
+\begin{itemize}
+    \item Organize the whole model hiearchy as a tree structure
+    \item Examples of language who do that: VRML, OpenSG
+\end{itemize}
+
+How does this work exactly? We have group nodes, who associate nodes into hierarchies, leaf nodes, who contain all the descriptive data of objects in the virtual world used to render them.
+
+\subsubsection*{Avoid Modeling Glitches}
+\begin{enumerate}
+    \item Avoid T-Join \begin{itemize}
+        \item Problem: we have edges which sometimes don't touch due to computation and rounding errors of floats
+        \item Solution: we break a triangle into two triangles.
+    \end{itemize}
+    \item Avoid overlapping polygons in your model \begin{itemize}
+        \item Problem: overlapping triangles give flipping colors (\textbf{z fighting})
+        \item Solution: create another triangle for the overlapping area, or turn off depth test when drawing the next triangle
+    \end{itemize}
+    
+    
+\end{enumerate}
+ 
+
+\section{Lecture 4: Interactive 3D Control}
+\subsection*{Lecture Outline}
+\begin{enumerate}
+    \item Interactive Control Concept
+    \item Interactive Translation relative to screen
+    \item Interactive rotation: rolling ball
+\end{enumerate}
+
+\subsection{Interactive Control Concept}
+\begin{itemize}
+    \item \textbf{Idea:} we use the mouse as an input device for 3D viewing control
+    \item \textbf{Approach:} by modifying the (base) 4x4 Modelview matrix incrementally accordingly to the mouse motion, we can control our 3D viewing interactively. 
+\end{itemize}
+
+\textbf{Normal Modelview Transformation Equation:}  assume the modelview matrix is affine. In particular, it has translation, rotation and scaling only. If so we can write the Modelview transformation like this:
+
+\[
+    \begin{bmatrix} x_{eye}\\ y_{eye} \\ z_{eye} \\ 1 \end{bmatrix} = \begin{bmatrix} m_{11} & m_{12} & m_{13} & T_x \\ 
+        m_{21} & m_{22} & m_{23} & T_y \\
+        m_{31} & m_{32} & m_{33} & T_y \\
+        0 & 0 & 0 & 1\end{bmatrix} \begin{bmatrix} x_{world} \\ y_{world} \\ z_{world} \\ 1 \end{bmatrix} 
+.\]
+
+
+\subsection{Interactive Translation relative to screen}
+Left-Multiply a translation matrix to the existing modelview. We can have a screen-aligned translation, since we don't need to use the fixed point rule for translations.
+
+%TODO: show OpenGL implementation, all in slides
+
+\subsection{Interactive rotation: rolling ball}
+If we want to rotate our existing modelview, one of the most common mistakes being made is left-multiplying the rotation matrix to our modelview. We need to apply the \textbf{fixed point rule}
+\begin{enumerate}
+    \item Undo the translation $(T_x, T_y, T_z)$ in the modelview matrix
+    \item Left-multiply the rotation matrix
+    \item Redo the translation $(T_x, T_y, T_z)$ 
+\end{enumerate}
+\noindent
+Now we need to construct the rotation matrix, to map our 2D mouse motion to a 3D rotation.
+\begin{itemize}
+    \item \textbf{Method:}  rolling ball
+    \item \textbf{Idea:} imagine the object is inside a glass ball of radius r.
+    \item To construct the rotation matrix: \begin{enumerate}
+        \item Put the mouse motion in an XY-eye space: (dx, dy, 0)
+        \item Axis of rotation perpendicular to the motion vector: (-dy, dx, 0)
+        \item Angle of rotation relative to motion vector length: $\sqrt{dx^2 + dy^2}$ 
+    \end{enumerate}
+
+    %TODO: include graphic of OGL implementation
+    
+\end{itemize}
+
+\section{Lecture 5: Cameras, Projections, and Clipping}
+\subsection*{Lecture Outline}
+\begin{enumerate}
+    \item Pin-hole camera
+    \item Family of Projections
+    \item Parallel Projection
+    \item Perspective Projection
+    \item OpenGL Projection Model: 4x4 projection matrix
+    \item Clipping and Perspective Division
+\end{enumerate}
+
 
 
 

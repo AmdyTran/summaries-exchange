@@ -30,3 +30,14 @@
 \BOOKMARK [3][-]{subsubsection.3.2.2}{Other 2D transformations}{subsection.3.2}% 30
 \BOOKMARK [2][-]{subsection.3.3}{Matrix operations}{section.3}% 31
 \BOOKMARK [3][-]{subsubsection.3.3.1}{Homogenous representations}{subsection.3.3}% 32
+\BOOKMARK [1][-]{section.4}{REAL Lecture 3: Hierarchical Model}{}% 33
+\BOOKMARK [2][-]{subsection.4.1}{Graphics Primitives: Points, Lines and Triangles}{section.4}% 34
+\BOOKMARK [2][-]{subsection.4.2}{Data structure: vertex list and index list}{section.4}% 35
+\BOOKMARK [2][-]{subsection.4.3}{Hierarchical structure}{section.4}% 36
+\BOOKMARK [2][-]{subsection.4.4}{View-world or Modelview transformations}{section.4}% 37
+\BOOKMARK [2][-]{subsection.4.5}{Basic scenegraph concept}{section.4}% 38
+\BOOKMARK [1][-]{section.5}{Lecture 4: Interactive 3D Control}{}% 39
+\BOOKMARK [2][-]{subsection.5.1}{Interactive Control Concept}{section.5}% 40
+\BOOKMARK [2][-]{subsection.5.2}{Interactive Translation relative to screen}{section.5}% 41
+\BOOKMARK [2][-]{subsection.5.3}{Interactive rotation: rolling ball}{section.5}% 42
+\BOOKMARK [1][-]{section.6}{Lecture 5: Cameras, Projections, and Clipping}{}% 43

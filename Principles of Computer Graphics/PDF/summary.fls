@@ -736,8 +736,8 @@ INPUT C:\Users\andyt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tf
 INPUT C:\Users\andyt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmex10.tfm
 INPUT C:\Users\andyt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
 INPUT C:\Users\andyt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-OUTPUT c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.toc
 INPUT C:\Users\andyt\AppData\Local\MiKTeX\pdftex\config\pdftex.map
+OUTPUT c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.toc
 INPUT C:\Users\andyt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\andyt\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1095.tfm
 INPUT C:\Users\andyt\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti10.tfm

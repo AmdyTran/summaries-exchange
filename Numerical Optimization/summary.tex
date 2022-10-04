@@ -433,5 +433,142 @@ Therefore we have a maximal rate of local variation along the gradient. In contr
 \subsection*{Hessian}
 %TODO: fuck writing the hessian down.
  
- 
+
+\section{Lecture 5 - 03/10/2022: ..}
+\subsection*{Convex sets}
+\begin{itemize}
+    \item Linear combination of vectors $x_1, ..., x_k$ with scalar coefficients $\theta_1, \theta_k $: $\sum_{i=1}^{k} \theta_i x_i$
+    \item Convex combination is a linear combination with coefficients $\theta_1, ..., \theta_k$ that satisfy: $\theta_i \forall i$ and $\sum_{i=1}{k} \theta_i= 1 $   
+\end{itemize}
+
+\begin{definition}[Convex set] $S \subseteq \mathbb{R}^d$ is called a convex set if for every $x,y \in S$, S includes the line segment between x and y \[
+\text{For all} x,y\in S, \theta \in[0,1]: \theta x (1-\theta)y \in S
+.\]   
+    
+\end{definition}
+  
+\begin{proposition}
+    A convex set S is closed to any convex combination of its points, i.e. for every $k\in \mathbb{N}$, non-negative $\theta_1, ..., \theta_k \geq 0$, $\sum_{i=1}^{k} \theta_i = 1$    
+\end{proposition} %TODO: add sth from slide 8
+
+
+\begin{itemize}
+    \item Examples of convex sets \begin{enumerate}
+        \item Hyperplanes $\{ \mathbf{x}: \mathbf{a^Tx} = b \}$
+        \item Halfspaces $\{ \mathbf{x}: \mathbf{a^Tx} \leq b \}$
+        \item Norm balls $\{ \mathbf{x}: \mathbf{||x||} \leq \epsilon \}$ 
+    \end{enumerate}
+
+    \item Convexity preserving operations: convex sets are closed to the following operations: \begin{itemize}
+        \item Intersection
+        \item Affine and inverse-Affine mappings: $f:\mathbb{R}^d \to \mathbb{R}^m, f(x) = Ax + b$ 
+        \item Linear fractional functions: $f:\mathbb{R}^d \to \mathbb{R}^m, f(x) = \frac{Ax + b}{c^Tx +d}$, where $dom(f) =$ %TODO: finish slide 9  
+    \end{itemize}
+    
+\end{itemize}
+
+\subsubsection*{Convex functions: }
+\begin{theorem}[Affine functions and convex combinations]
+    A multivariable function $f:\mathbb{R}^d \to \mathbb{R}$ is an affine function if and only if for all \[
+        \mathbf{x,y}\in \mathbb{R}^d, \theta \in [0,1]: f(\theta x + (1-\theta)y = \theta f(x) + (1-\theta)f(y))
+    .\]    
+    
+\end{theorem}
+
+\begin{definition}[Convex functions]
+    We call f a convex function if $dom(f)$ is a convex set and $\forall x,y \in dom(f), \theta\in [0,1:] f(\theta x + (1-\theta) y) \leq \theta f(x) + (1-\theta)f(y)$. Also we call f concafe if $-f$ is convex.    
+\end{definition}
+
+Observation: an affine function f is both convex and concafe. If a function is both convex and concave then it's also affine.
+
+Examples of scalar functions:
+\begin{itemize}
+    \item Convex functions \begin{enumerate}
+        \item powers: $f(x) = x^p$ for $dom(f) = \mathbb{R}_+, p\geq_1$ or $p\leq0$   
+        \item Absolute powers: $f(x) = |x|^p$ for $dom(f) = \mathbb{R}, p \geq 1$  
+        \item Exponential: $f(x) = e^{ax+b}$ for $dom(f) \mathbb{R}$, $a,b\in\mathbb{R}$   
+    \end{enumerate}
+    \item Concave functions: \begin{enumerate}
+        \item Powers: $f(x) = x^p$ for $dom(f) = \mathbb{R}_+, 0 \leq p \leq 1$
+        \item Logarithm: $f(x) = log(x)$ for $dom(f) = \mathbb{R}_+$    
+    \end{enumerate}
+
+\end{itemize}
+
+Examples of multivariable functions:
+\begin{itemize}
+    \item Convex functions: \begin{enumerate}
+        \item Norms: $f(x) = ||x||$ for $dom(x) = \mathbb{R}^d$
+        \item Norm powers: $f(x) = ||x||^p$ for $dom(f) = \mathbb{R}^d, p\geq 1$     
+        \item Log-sum-exp: $f(x) = log(\\sum_{i=1}^{d}e^{x_i})$ for $dom(f) = \mathbb{R}^d$  
+    \end{enumerate}
+    \item Concave functions: \begin{enumerate}
+        \item Entropy: $\sum_{i=1}^{d} x_i log(\frac{1}{x_i})$ for $dom(f) = \mathbb{R}_+^d$  
+        \item Geometric mean: $f(x) = (x_1x_2...x_d)^{\frac{1}{d}}$ for $dom(f) = R_+^d$  
+    \end{enumerate}
+\end{itemize}
+
+Methods of identifying convex functions:
+\begin{enumerate}
+    \item Verifying the defining inequality (hard!!)
+    \item Epigraph and sub-level sets
+    \item Gradients and hessians
+    \item Operations that preserve convexity
+\end{enumerate}
+
+\subsection*{Epigraph and sub-level sets}
+\begin{proposition}[Epigraph of convex functions]
+    A function f is convex if and only if its epigraph is a convex set
+\end{proposition}
+
+\begin{itemize}
+    \item We defined the contour (level) set of $C_f(t)$ as the set of inputs mapped to t: \[
+    C_f(t) = \{x \in dom(f): f(x) = t \}
+    .\]   
+    \item We defined the sublevel set $S_f(t)$ as the set of inputs mapped to below t: \[
+    S_f(t) = \{ x \in dom(f) : f(x) \leq t \}
+    .\]  
+\end{itemize}
+
+\begin{proposition}
+    If f is a convex function, $S_f(t)$ will be a convex set for every t. 
+\end{proposition}
+
+
+\subsection*{Gradient and Hessian of convex functions}
+\begin{theorem}[First-order convexity condition]
+    A differentiable f is convex if and only if its domain is convex and \[
+    \forall x,y\in dom(f): f(y)  \geq f(x) + \nabla f(x)^T (y-x)
+    .\] 
+    
+\end{theorem}
+
+We can see the RHS is the first-order taylor series expanion around x, if f is twice differentiable we can use the second-order Taylor expansion
+
+\begin{theorem}[Second-order convexity condition]
+    A twice-differentiable f is convex if and only if its domain is convex and \[
+    \forall x\in dom(f): H_f(x) \text{is PSD}
+    .\] 
+    
+\end{theorem}
+
+\subsection*{Convex quadratic functions}
+\begin{itemize}
+    \item Consider a quadratic function characteerized by symmetric A,b,c: \[
+    f(x) = \frac{1}{2}x^T Ax + b^Tx + c
+    .\] 
+    \item We earlier derived the gradient and Hessian as $\nabla f(x) = Ax + b, H_f(x) = A$
+    \item Second-order condition: f is convex if and only if A is PSD
+    \item Application to the least-squares objective $f(x) = ||Ax+b||^2$  
+\end{itemize}
+
+\subsection*{Convexity preserving operations}:
+\begin{itemize}
+    \item Positive scalar multiplication
+    \item Addition of convex functions
+    \item Composition with affine functions, i.e. $f(Ax+b)$, if f is convex
+    \item Pointwise maximum: $max(f_1(x), ..., f_k(x))$ is convex if each $f_i$ is convex
+    \item Composition $f(g(x))$ is convex if f,g are convex and f is non-decreasing in every entry   
+\end{itemize}
+
 \end{document}

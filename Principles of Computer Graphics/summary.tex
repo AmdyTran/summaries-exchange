@@ -5,11 +5,13 @@
  
 \documentclass[11pt]{article}
  
-\usepackage[margin=0.8in]{geometry} 
+\usepackage[margin=0.7in]{geometry} 
 \usepackage{amsmath,amssymb}
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{graphicx}
+\usepackage{subfig}
+
 \hypersetup{
   colorlinks   = true, %Colours links instead of ugly boxes
   urlcolor     = blue, %Colour for external hyperlinks
@@ -21,6 +23,8 @@
 
 
 \usepackage{tcolorbox}
+\setcounter{section}{-1}
+\graphicspath{ {./img/} }
 
  
 \newtheorem{theorem}{Satz}
@@ -61,8 +65,7 @@ This will be a very personalised summary for me to use to study for the course P
 
 \newpage
 
-\section{Lecture 1 - 06/09/2022: Introduction, Display and Colour}
-\subsection{Important organizational stuff}
+\section{Important organizational stuff}
 \begin{itemize}
     \item \href{mailto:pheng@cse.cuhk.edu.hk}{pheng@cse.cuhk.edu.hk}, office hours: Thursday 2:30 PM - 4:30 PM, SHB 929
     \item \textbf{Lecture hours:}  Tuesday 10:30 am - 12:15 pm, Thursday 11:30 am - 12:15 PM
@@ -72,7 +75,7 @@ This will be a very personalised summary for me to use to study for the course P
     \item \textbf{Grading}: (2) programming assignments 0.25, course project 0.20, mid-term exam 0.25, final exam 0.30
     \item \textbf{Release}: Assignment 1 - release 12/9, deadline 02/10, assignment 2 - release 3/10, deadline 30/10, course project - release 31/10, deadline 27/11, mid-term exam 18/10 10:30 - 12:15
 \end{itemize}
-
+\section{Lecture 1 - 06/09/2022: Introduction, Display and Colour}
 \subsection{Display and Colour}
 Lecture Outline
 \begin{itemize}
@@ -371,6 +374,7 @@ Fixed-point: origin dependent
 \end{itemize}
 
 %TODO: include img of TS and TF, they are in the ./img/folder   
+
 \subsection{Data structure: vertex list and index list}
 We have two kinds of data strucutres, namely vertex lists and index lists. 
 \begin{itemize}
@@ -405,6 +409,7 @@ Notes about the modelview Matrix $M_{modelview}$:
 \end{itemize} %TODO: explain what point 3 does exactly?
 
 %TODO: show to illustration from the slides, we have mv_steps.png to import
+\includegraphics[scale=.5]{mv_steps.png}
  
 \subsection{Basic scenegraph concept}
 \begin{itemize}
@@ -491,7 +496,426 @@ Now we need to construct the rotation matrix, to map our 2D mouse motion to a 3D
     \item Clipping and Perspective Division
 \end{enumerate}
 
+\subsection{Pin-hole camera}
+\begin{itemize}
+    \item How does a pin-hole camera work: we have a (small) hole to focus all light in an area. The object goes through an barrier and is displayed on film. The image is always inverted
+    \item \textbf{Advantages:} easy to simulate, everything is in focus
+    \item \textbf{Disadvantages: } needs a bright scene (long exposure), everything is in focus (not realistic in photography)  
+\end{itemize}
 
+There is also second method, namely a camera with lens
+\begin{itemize}
+    \item How does a camera with a lens work: an object goes through a lens and falls on a focal point. The distance between lens and camera is called focal length. You can compare this to an eye where the eye is the lens and it falls on cones. 
+    \item \textbf{Advantages: } no need to have a bright scene, not everything is in focus (more realistic in photography)
+    \item \textbf{Disadvantages: } need more programming to simulate, not everything is in focus  
+\end{itemize}
+
+Now, we don't care about cameras that much obviously, how does it work in programming or even OpenGL?
+Namely, the OpenGL viewpoint acts as a virtual camera, to define a camera we need the following
+\begin{enumerate}
+    \item Viewpoint (what is in the middle of our view)
+    \item View direction
+    \item Field of view (in degrees)
+    \item Film size 
+    \item Projection plane
+\end{enumerate}
+
+Viewing requires three elements:
+\begin{itemize}
+    \item Objects to be viewed, e.g. whatever you are taking a picture of (1), input geometry (2)
+    \item A viewer with a projection surface, e.g. the camera (1), OpenGL camera (2)
+    \item A projection from the objects to the viewing surface, e.g. defined by the lens, map 3D objects to the 2D surface (1), OpenGL projection matrix (2)
+\end{itemize}
+(1) being real life, (2) OpenGL
+
+\subsubsection*{Planar Geometric Projections}
+\begin{itemize}
+    \item Standard projections are assumed to be onto a single plane (2D)
+    \item There are two kinds of projections \begin{enumerate}
+        \item Perspective projection: all rays converge at a single point (center of projection)
+        \item Orthographic projection: all rays are parallel
+    \end{enumerate}
+\end{itemize}
+
+\noindent We need coordinate systems to render geometry objects, in the following way:
+\newline
+$
+\text{Object space} \stackrel{Linear trans}{\to} \text{World space} \stackrel{Linear trans}{\to} \text{Eye/Camera space} \stackrel{Non-lin trans}{\to} \text{Screen space} \stackrel{raster.}{\to} \text{Raster space} $
+
+\subsubsection*{Object space}
+\begin{itemize}
+    \item Most natural coordinate space
+    \item Local coordinate system, local to the object
+    \item Other name: modeling coordinate system
+\end{itemize}
+
+\subsubsection*{World space}
+\begin{itemize}
+    \item A coordinate system that is shared by all objects in the modeled scene
+\end{itemize}
+
+\subsubsection*{Eye/Camera space}
+\begin{itemize}
+    \item The coordinate system with the eye or the center of projection as its origin
+    \item A space in which the viewing volume is established
+    \item Facilitates clipping (removing out-of-view objects)
+\end{itemize}
+
+\subsubsection*{Screen space}
+\begin{itemize}
+    \item Transformation to screen space is a process that describes how light rays reach our eyes
+    \item Screen space is defined to act within a closed volume called the viewing frustum
+\end{itemize}
+
+\begin{itemize}
+    \item Viewing coordinates system, $[x_v, y_v, z_v]$ describes 3D objects with respect to a viewer
+    \item A viewing plane is set up perpendicular to $z_v$ and aligned with $(x_v, y_v)$
+    \item To set up a viewing plane we need
+    \begin{itemize}
+        \item $P = (P_x, P_y, P_z)$ the point where the camera is located
+        \item L, the point to look at 
+        \item V, the view-up vector whose projection onto the view-plane is directed up
+    \end{itemize}
+\end{itemize}
+
+To form a viewing coordinate system we can calculate the following, $Z_v = \frac{P-L}{|P-L|}, X_v = \frac{V\times Z_v}{|V\times Z_v|}, Y_v = Z_v \times X_v$. The transformation matrix M from world-coordinate into viewing-coordinates is defined as 
+\[
+M = \begin{bmatrix} x_v^x & x_v^x & x_v^x & 0 \\ y_v^x & y_v^x & y_v^x & 0 \\ z_v^x & z_v^x & z_v^x & 0 \\ 0 & 0 & 0 & 1  \end{bmatrix}  \begin{bmatrix} 1 & 0 & 0 & -P_x\\ 0 & 1 & 0 & -P_y \\ 0 & 0 & 1 & -P_z\\ 0 & 0 & 0 & 1 \end{bmatrix} = R\cdot T 
+.\]  
+
+\subsubsection*{3D Projection}
+\begin{itemize}
+    \item We model in 3D, but final display on the monitor is 2D
+    \item Projection refers to the process of projecting the 3D world into 2D, the visualizing of it.
+    \item Two major types of projection: perspective, like the eye; orthogonal projection, preserve length after projection, used in CAD systems
+\end{itemize}
+
+What is a projection:
+Squeezing a higher dimension into a lower dimension, where in graphics usually 3D to 2D.
+
+
+\subsection{Family of Projections}
+%TODO insert image of family of projections
+\subsubsection*{Parallel vs perspective projections}
+\begin{itemize}
+    \item In 3D we map points from 3-space to the projection plane (PP) along projection lines emanating from the center of projection
+    \item The center of projection (COP) is exactly the same as the pinhole in a pinhole camera
+\end{itemize}%TODO insert image of page 23 lecture 5
+
+
+
+\subsection{Parallel Projections}
+We can specify direction of projection (DOP) because all projections lines are parallel
+\begin{enumerate}
+    \item Oblique projection (DOP not perpendicular to PP) 
+    \item Orthographic projection (DOP perpendicular to PP)
+\end{enumerate}
+
+\subsubsection*{Oblique Projection (Parallel)}
+Like shearing the geometry along PP, two standards of oblique projection:
+\begin{enumerate}
+    \item Cavalier projection \begin{enumerate}
+        \item DOP makes 45 degree angle with PP
+        \item Does not foresherten lines perpendicular to PP
+        \item Preserves length
+    \end{enumerate}
+    \item Cabinet projection \begin{enumerate}
+        \item DOP makes 63.4 degrees angle with PP
+        \item Foreshorten lines perpendicular to PP by one-half (called Chinese Perspective)
+    \end{enumerate} 
+\end{enumerate}
+
+\subsubsection*{Orthographic Projection (parallel)}
+\begin{enumerate}
+    \item Orthogonal Projection \begin{itemize}
+        \item DOP align with object's X, Y, or Z-axis
+        \item implementation: just throw away one of the dimensions (set to 0)
+        \item side, top/plan, or front views
+    \end{itemize}
+    \item Axonometric projection \begin{itemize}
+        \item arbitrary DOP, not parallel to world X, Y, nor Z-axis
+        \item special case: isometric (exactly 120 degrees)
+    \end{itemize}
+\end{enumerate}
+
+Properties of parallel projection: 
+\begin{itemize}
+    \item Not realistic looking
+    \item Good for exact measurements, remember for CAD!
+    \item Kind of affine transformations, parallel lines remain parallel, angles not preserved
+\end{itemize}
+
+\subsection{Perspective Projection}
+\begin{itemize}
+    \item COP is at finite distance to the PP, so the further away an object is, the smaller it is
+    \item How we see the nature
+\end{itemize}
+
+\subsubsection*{Vanishing points}
+\begin{itemize}
+    \item There exist infinitely many vanishing points
+    \item There can be up to three principal vanishing points (on the axes)
+    \item Perspective projections are categorized by the number of principal vanishing points, equal to the number of principal axes intersected by the viewing plane
+    \item Most commonly used: one-point and two-points perspective
+\end{itemize}
+
+In perspective transformation, parallel lines appear to converge to a single point (easy to see if we have squares and draw parallel lines.)\newline
+\textbf{Vanishing point: } points at which parallel lines on PP  
+%TODO: there is a summary of projections in page 35
+
+\subsubsection*{View Frustum: the visible "volume" }
+%TODO: idk what this is, have to look it up
+
+\subsection{OpenGL Projection Matrix: 4x4 projection matrix}
+OpenGL projection settings:
+\begin{enumerate}
+    \item Eye/camera position:
+    \item Viewing direction
+    \item View-up direction
+    \item Viewing region (viewing frustum)
+    \item Visible depth range
+\end{enumerate}
+
+\subsubsection*{Orthographic Projection in OpenGL}
+We can use the method \textit{glOrtho(l,r,b,t,n,f)} or \textit{gluOrtho2D(l,r,b,t)}. Where they stand for left, right, bottom, top, neara, far. In gluOrtho2D, near is set to 0, far to 1.
+
+\subsubsection*{Perspective Concept in OpenGL}
+Let's say a point is proejcted onto the projection plane, the x and y coordinates are scaled. We can compute it using following: $x_c = -\frac{x}{z}, y_c = - \frac{y}{z}$. For $z_c$, I can't find it, but a smaller $z_c$ means a closer clip coordinate from the eye.    
+
+\subsection{Clipping and Perspective Division}
+Perspective division: $x' = x_\frac{c}{w_c}, y' = \frac{y_c}{w_c}, z' = \frac{z_c}{w_c}$ 
+
+%TODO: missing a few info about clippign...
+
+\subsubsection*{Viewport transformation}
+glViewport(x,y,width, height) is a command, to define the rectangle where the image is mapped in window pixel coordinates. 
+We need to pay attention the aspect ratio!
+
+
+
+
+\section{Lecture 6: Clipping}
+\subsection*{Lecture contents}
+\begin{itemize}
+    \item Purpose: eliminate portions of objects outside the viewing Frustum
+    \item View frustum: boundaries of the image plane projected in 3D, a near and far clipping plane
+\end{itemize}
+%TODO: include graph page 2
+
+Reasons to use clipping
+\begin{itemize}
+    \item Avoid degeneracies: we don't draw stuff behind the eye, and avoid division and overflow
+    \item Efficiency: we don't care about stuff we don't see
+    \item Prevent unnecessary rasterization (which is expensive)
+\end{itemize}
+
+What will come later is culling. The name says enough, if a part is partially in and outside we need to clip, if it's completely outside we need to cull. The final image must be no different than if we didn't do any of this!
+
+There are different strategies
+\begin{itemize}
+    \item Don't clip, lol
+    \item Clip during rasterization
+    \item Analytical clipping: alter input geometry
+\end{itemize}
+
+\subsubsection*{Point Clipping}
+Given a point (x,y,z) we have to determine whether it's in our viewing volume, which is the easiest.
+Namely, our view frustum consists of 6 planes, we have to test again each plane. If $H\cdot p < 0$, we reject. Where a plane is defined by $Ax + By + Cz +D  = 0 $, and $H = (A,B,C,D)$, we assume $D = 1$ for now and $p = (a,b,c,1)$   
+
+\subsubsection*{Line Clipping}
+Idea is similar, let's say we have a segment PQ, we check the following for each plane.
+
+\begin{itemize}
+    \item If $H\cdot P > 0$ and $ H\cdot q < 0$, then clip q to plane
+    \item If $H\cdot p < 0$ and $H \cdot q > 0$, then clip p to plane
+    \item If $H\cdot p > 0$ and $H \cdot q > 0$, pass through
+    \item If $H\cdot p < 0$ and $H \cdot q < 0$, clipped out         
+\end{itemize}
+
+Also, to see the intersection point we can use the maths from one of the first lectures to get it.
+
+There is also another mathematical way, namely computing the sidedness of each vertex with respect to each bounding plane and combine using logical AND. 
+
+Cohen-Sutherland Line Clipping Algorithm:
+\begin{enumerate}
+    \item First, outcode of end-points pairs are checked for trivial acceptance
+    \item If the line cannot be trivially accepted, region checks are done trivial rejection
+    \item If line cannot be trivially accepted or rejected, subdivide so that one or both segments can be discarded
+    \item These three steps are performed iteratively until what remains can be trivially accepted or rejected
+\end{enumerate}
+
+%TODO: more detail later
+
+\subsubsection*{Polygon Clipping}
+Polygon clipping is symmetric, even when concave or convex. In the most naive case we make $N*m$ intersection and link all segments. We could walk along the boundary CCW and compute intersection points where they enter and leave the window.
+\newline
+Walking rules: 
+\begin{itemize}
+    \item Out-to-in pair: record clipped point and follow polygon boundary ccw
+    \item In-to-out pair: record clipped point and follow window boundary ccw
+\end{itemize}
+
+Using this we know which part falls within the window.
+
+\section{Lecture 7: Rasterization and Anti-aliasing}
+\subsection*{Lecture outline}
+\begin{enumerate}
+    \item Introduction to rasterization
+    \item Rasterization algorithms
+    \item Introduction to anti-aliasing
+    \item Anti-aliasing concepts
+    \item Anti-aliasing in graphics hardware
+\end{enumerate}
+
+\subsection{Introduction to rasterization}
+Idea is, we have polygons, with information like color, depth, etc. We want to display them on our display (on the raster), so we need a method to do it, since our screen is only finite.
+So how does it work:
+\begin{enumerate}
+    \item Select pixels on the screen, that best cover the 2D continuous geometry
+    \item Then interpolate the per-vertex information for each pixel
+    \item Geometries include: points, lines, triangles, bitmap, etc.
+    \item Hardware (part of graphics hardware) is called rasterizer
+\end{enumerate}
+
+\subsection{Rasterization algorithms}
+\subsubsection*{Points}
+There are two ways, namely
+\begin{itemize}
+    \item Draw a square (non-antialiased)
+    \item Draw a circle (antialiased)
+\end{itemize}
+
+Shortly, why we can draw circle, is to make it not look as rough, for example for lines we want to smoothen it out since we don't have an infinite amount of pixels.
+
+\subsubsection*{Line drawing}
+We need to approximate the mathematical lines if we want to draw a line: $y = mx + b$, which we learned to calculate in school.
+
+%TODO: I dont really understand this, have to look at it again.
+
+
+\subsubsection*{Triangle}
+We subdive polygons into triangles (we can always do this), and now we just have to rasterize the triangles.
+This can be done efficiently, because of:
+\begin{enumerate}
+    \item Scan line coherence: long horizontal stretches of the same fill value
+    \item Edge coherence: easy to use line algorithm to computer next scan line's end points
+\end{enumerate}
+
+%TODO: i actually dont really understand this LOL
+
+\subsection{Introduction to anti-aliasing}
+\subsection{Anti-aliasing concepts}
+\subsection{Anti-aliasing in grahics hardware}
+
+
+\section{Lecture 8: Hidden Surface Removal}
+\subsection*{Lecture Outline}
+\begin{enumerate}
+    \item Introduction Hidden Surface Removal
+    \item Method 1: Ray Casting
+    \item Method 2: Z Buffer Method
+    \item Method 3: Back face culling
+    \item Method 4: Potentially Visible Set (PVS)
+    \item Hidden Surface Removal in OGL
+\end{enumerate}
+
+
+\subsection{Introduction to Hidden Surface Removal}
+When we have multiple 3D objects, it's possible we don't see every part, since they could be hidden somewhere. Computationally it's expensive to still render them, and just better to remove them alas \textit{hidden surface removal/elimination}.
+
+There are multiple methods on how to achieve it, for example object order and image order.
+\subsubsection*{Object Order vs image order}
+\begin{itemize}
+    \item Object order: Each 3D object is considered and drawn once, we could draw same pixels multiple times if they overlap, for example Z-buffer
+    \item Image order: Each pixel is considered once, so we draw one object and move on, we need to compute relationships between objects, for example Ray Casting
+\end{itemize}
+
+\subsubsection*{Sort first vs Sort last}
+\begin{itemize}
+    \item Sort first: find the depth-based ordering and draw from back to front, for example Painter's algorithm
+    \item Sort last: sort implicitly as more information becomes available, for example Z-buffer
+\end{itemize}
+
+\subsection{Ray Casting}
+The projection plane (PP) is partitioned into pixels to match screen resolution. \begin{itemize}
+    \item For each pixel $p_i$, construct ray (projector) from COP through PP at that pixel and into scene
+    \item Intersect the ray with every object in the scene, color the pixel according to the object with the closest intersection 
+\end{itemize}
+
+\subsubsection*{Implementation}
+We have to parameterize the ray \[
+R(t) = (1-t)c + tp_i
+.\] 
+\begin{itemize}
+    \item If a ray intersects some object $O_i$, get parameter t such that first intersection with $O_i$ occurs at $R(t_i)$
+    \item We have to find out which object owns the pixel 
+\end{itemize}
+
+More detail later in the course
+
+
+\subsection{Z-Buffer method}
+Idea is to have an additional channel in memory for pixel depth, which is called depth-buffer or Z-buffer (remember from the righthand's rule, z-axis is into or away from the screen). When drawing a pixel, we compare the depth, only draw when it's closer\dots
+
+\subsubsection*{Implementation}
+\includegraphics[scale=.8]{z_buff_implem}
+
+
+\subsubsection*{Positives and Negatives}
+\begin{itemize}
+    \item Positive: \begin{itemize}
+        \item Runtime is fast
+        \item Simple to implement
+    \end{itemize}
+    \item Negative: \begin{itemize}
+        \item Suffers from aliasing, e.g. z-fighting
+        \item Cannot render transparency
+    \end{itemize}
+    
+    
+\end{itemize}
+
+\subsection{Back face culling}
+\begin{itemize}
+    \item Used together with polygon-based algorithms, if we have solid objects, we don't need to draw polygons that are not in our view. So we can elimnate those (culling). 
+    \item Can be used together with ray-casting and Z-buffer algorithms
+    \item We need a normal vector (orthogonal to the plane), we check the angle between the viewer and the normal to some polygon. If it's between -90 degrees and 90 degrees $(\cos \theta \geq 0)$, then it's front facing.
+    \item Or verify $N_p \cdot V$, where $N_p$ is the polygon normal, $V$ the line of sigh vector
+    \item Hard to do for concave objects, that's why usually preprocessing step for Z-buffer or ray casting    
+\end{itemize}
+
+\subsection{Potentially visible set (PVS)}
+\begin{itemize}
+    \item Acceleration technique
+    \item Data structure (usually pre-computed) that saves what parts of the region is always visible from within the region
+    \item Divide into regions and precompute the objects
+    \item Advantage: good speed up
+    \item Disadvantage: extra memory, preprocessing time, doesn't allow dynamic scenes
+\end{itemize}
+
+
+\subsection{Hidden Surface Removal in OGL}
+Three related modules:
+\begin{enumerate}
+    \item View Frustum Clipping, remove objects outside view
+    \item Back-face culling
+    \item Depth-buffering
+    \item (Or Ray casting must be implented yourself)
+\end{enumerate}
+
+\subsubsection*{Back-Face Culling in OGL}
+\begin{itemize}
+    \item Done before rasterization step
+    \item OGL functions: glEnable(GL\_CULL\_FACE) (or disable, which is standard); glFrontFace(mode) specify which is the front face; glCullFace(mode), which side to cull.
+\end{itemize}
+
+\subsubsection*{Depth Buffering}
+\begin{itemize}
+    \item Request depth buffer when creating a window, e.g. glutInitDisplayMode(...| GL\_DEPTH)
+    \item Always clear depth buffer before rendering a screen again, with glClear and glClearDepth
+    \item Enable depth test, glEnable(GL\_DEPTH\_TEST)
+    \item glDepthFunc defines the test condition for pixel fragment, default and normal argument is GL\_LESS. All with smaller Z-value should pass
+\end{itemize}
 
 
 \end{document}

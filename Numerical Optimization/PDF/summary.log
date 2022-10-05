@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.5)  14 SEP 2022 15:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.5)  3 OCT 2022 13:13
 entering extended mode
 **"c:/Users/andyt/Documents/ETHZ/Semester 5/Numerical Optimization/summary.tex"
 ("c:/Users/andyt/Documents/ETHZ/Semester 5/Numerical Optimization/summary.tex"
@@ -554,22 +554,32 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
  [1
 
-{C:/Users/andyt/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3] ("c:\Users\andyt\Documents\ETHZ\Semester 5\Numerical Optimization\PDF\summary.aux")
+{C:/Users/andyt/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3]
+Overfull \hbox (5.65169pt too wide) in paragraph at lines 190--191
+[]\OT1/cmr/m/it/10.95 A set of mu-tu-ally or-
+ []
+
+[4] [5] [6]
+Overfull \hbox (12.26068pt too wide) in paragraph at lines 390--390
+[]\OT1/cmr/m/it/10.95 The fol-low-ing pro-vides a gen-eral form of a quadratic
+ []
+
+[7] [8] [9] [10] [11] ("c:\Users\andyt\Documents\ETHZ\Semester 5\Numerical Optimization\PDF\summary.aux")
 Package rerunfilecheck Info: File `summary.out' has not changed.
-(rerunfilecheck)             Checksum: 8E86ADB0BE302822351CFA75BB8D8E6F;298.
+(rerunfilecheck)             Checksum: 17579F902025ABAA42FA53737565CB94;485.
  ) 
 Here is how much of TeX's memory you used:
- 17653 strings out of 479811
- 331999 string characters out of 2870178
- 624393 words of memory out of 3000000
- 34279 multiletter control sequences out of 15000+200000
- 544833 words of font info for 65 fonts, out of 3000000 for 9000
+ 17753 strings out of 479811
+ 332899 string characters out of 2870178
+ 625392 words of memory out of 3000000
+ 34287 multiletter control sequences out of 15000+200000
+ 546531 words of font info for 70 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,13n,96p,487b,448s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\andyt\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "c:\Users\andyt\Documents\ETHZ\Semester 5\Numerical Optimization\PDF\summary.pdf" (3 pages, 183082 bytes).
+ <C:\Users\andyt\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on "c:\Users\andyt\Documents\ETHZ\Semester 5\Numerical Optimization\PDF\summary.pdf" (11 pages, 260018 bytes).
 PDF statistics:
- 128 PDF objects out of 1000 (max. 8388607)
- 23 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 278 PDF objects out of 1000 (max. 8388607)
+ 112 named destinations out of 1000 (max. 500000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

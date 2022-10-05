@@ -76,14 +76,17 @@ This will be a very personalised summary for me to use to study for the course P
     \item \textbf{Release}: Assignment 1 - release 12/9, deadline 02/10, assignment 2 - release 3/10, deadline 30/10, course project - release 31/10, deadline 27/11, mid-term exam 18/10 10:30 - 12:15
 \end{itemize}
 \section{Lecture 1 - 06/09/2022: Introduction, Display and Colour}
-\subsection{Display and Colour}
-Lecture Outline
 \begin{itemize}
     \item Display Devices and Basic Terminologies
     \item Frame Buffer (Memory to Display)
     \item Color Space: RGB, CMY, HSV, YIQ, CIE YZ
     \item ALpha Channel and Double Buffering
 \end{itemize}
+
+\subsection{Display Devices and Basic Terminologies}
+\subsection{Frame Buffer (Memory to Display)}
+\subsection{Color Space: RGB, CMY, HSV, YIQ, CIE, YZ}
+\subsection{Alpha Channel and Double Buffering}
 
 \subsubsection{Display Devices}
 \textbf{Mechanism:}  shoot electrons with varying energy through vertical and horizontal deflectors to hit spot on screen, phosphors on screen jump to excited state when hit by electrons, emit monochromatic light when they drop to rest state
@@ -268,7 +271,6 @@ We have the following rules
     \item Basis vectors: we can specify the coordinate axes in any reference frame with a set of vectors, one for each axis
 \end{enumerate}
 
-\section{Lecture 3 - 13/09/2022}
 \textit{Continuation of previous lecture}
 Properties of cross product
 \newline
@@ -375,6 +377,14 @@ Fixed-point: origin dependent
 
 %TODO: include img of TS and TF, they are in the ./img/folder   
 
+\begin{figure}[h]
+    \centering
+    \subfloat[Triangle fan]{\includegraphics[width=0.4\textwidth]{tf.png}\label{fig:tf}}
+    \hfill
+    \subfloat[Triangle strip]{\includegraphics[width=0.4\textwidth]{ts.png}\label{fig:ts}}
+    \caption{In the triangle fan, we can get all triangles, in the strip only the coloured ones}
+  \end{figure}
+
 \subsection{Data structure: vertex list and index list}
 We have two kinds of data strucutres, namely vertex lists and index lists. 
 \begin{itemize}
@@ -408,8 +418,12 @@ Notes about the modelview Matrix $M_{modelview}$:
     \item When calling transformation operations, the kernel constructs a matrix for the transform and right multiplies it with its internal modelview matrix.
 \end{itemize} %TODO: explain what point 3 does exactly?
 
-%TODO: show to illustration from the slides, we have mv_steps.png to import
-\includegraphics[scale=.5]{mv_steps.png}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mv_steps.png}
+    \caption{Steps to construct MV matrix}
+    \label{fig:mv_steps}
+\end{figure}
  
 \subsection{Basic scenegraph concept}
 \begin{itemize}
@@ -433,6 +447,15 @@ How does this work exactly? We have group nodes, who associate nodes into hierar
     
 \end{enumerate}
  
+\subsection{Review questions}
+\begin{itemize}
+    \item Which two input types are the most efficient for rendering polygons and how do they differ?
+    \item Which two data structures exists and what are their benefits and negatives compared to each other?
+    \item What is an hierarchical model?
+    \item What is a modelview and how does it relate to object, world and eye space?
+    \item What are the two main modeling glitches, what causes them and how can you solve them?
+\end{itemize}
+
 
 \section{Lecture 4: Interactive 3D Control}
 \subsection*{Lecture Outline}
@@ -600,9 +623,14 @@ Squeezing a higher dimension into a lower dimension, where in graphics usually 3
 \begin{itemize}
     \item In 3D we map points from 3-space to the projection plane (PP) along projection lines emanating from the center of projection
     \item The center of projection (COP) is exactly the same as the pinhole in a pinhole camera
-\end{itemize}%TODO insert image of page 23 lecture 5
+\end{itemize}
 
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{par_vs_pers.png}
+    \caption{Difference between perspective and parallel}
+    \label{fig:par_vs_pers}
+\end{figure}
 
 \subsection{Parallel Projections}
 We can specify direction of projection (DOP) because all projections lines are parallel
@@ -747,7 +775,7 @@ Cohen-Sutherland Line Clipping Algorithm:
 %TODO: more detail later
 
 \subsubsection*{Polygon Clipping}
-Polygon clipping is symmetric, even when concave or convex. In the most naive case we make $N*m$ intersection and link all segments. We could walk along the boundary CCW and compute intersection points where they enter and leave the window.
+Polygon clipping is symmetric, even when convex. Hard to do when concave. In the most naive case we make $N*m$ intersection and link all segments. We could walk along the boundary CCW and compute intersection points where they enter and leave the window.
 \newline
 Walking rules: 
 \begin{itemize}
@@ -858,7 +886,12 @@ More detail later in the course
 Idea is to have an additional channel in memory for pixel depth, which is called depth-buffer or Z-buffer (remember from the righthand's rule, z-axis is into or away from the screen). When drawing a pixel, we compare the depth, only draw when it's closer\dots
 
 \subsubsection*{Implementation}
-\includegraphics[scale=.8]{z_buff_implem}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{z_buff_implem.png}
+    \caption{Implementation in OGL}
+    \label{fig:implem_z_buff}
+\end{figure}
 
 
 \subsubsection*{Positives and Negatives}
@@ -916,6 +949,124 @@ Three related modules:
     \item Enable depth test, glEnable(GL\_DEPTH\_TEST)
     \item glDepthFunc defines the test condition for pixel fragment, default and normal argument is GL\_LESS. All with smaller Z-value should pass
 \end{itemize}
+
+
+\section{Lecture 9 - Lighting, Material, and Shading}
+\subsection*{Lecture Outline}
+\begin{itemize}
+    \item Introduction
+    \item Light source
+    \item Phong Illumination Model (Lightning Model)
+    \item Interpolative Shading
+    \item Lighting in OGL
+\end{itemize}
+
+
+\subsection{Introduction}
+Till now we have covered almost everything about how we create an object and display it, what misses is how we colour it or how to set each pixel. This is what we call \textbf{shading} (or lighting model, light reflection model, local illumination model, etc...).
+This is one of the hardest parts to do, since light in our real world is not perfect and gets reflected and absorbed by everything.  
+\subsection{Light source}
+Firstly, a light source is any object that \textbf{emits radiant energy}, think of our own world, sun, lamps, etc. There are many kinds, directional, point, spot lights, but also extended and environment light sources.
+
+\subsubsection*{Directional Light Source}
+We assume the light source is infinity away, the incoming light rays are parallel and of same intensity, which makes it all easy to compute. Think of Physics in high school and how we used the sun. 
+\subsubsection*{Point Light Source}
+The light source is at a finite distance from the surface, the light rays go in all directions and is harder to compute since the direction varies at each different surface point. Also the light dimmer with distance, which we have to consider as well (\textbf{attenuation}).
+
+\subsubsection*{Spot Light Source}
+Points at particular direction, within a certain angle, think of a flashlight, we also have distance attenuation. 
+
+\subsubsection*{Extended Light Source}
+Extended Light Soruce, like a line or area, where every point alone the line or area is a point light source. This is realistic, but even harder to compute, and we also get shadows. In OpenGL there is no direct support, can only approximate it using ray tracing.
+
+\subsubsection*{Environment as a Light Source}
+Why the environment? Everything reflects (except perfect mirrors). Consider it as a directional light source.
+
+\subsection{Phong Illumination Model (Lightning Model)}
+Given a light source, we need to build an approximation of the reality, which we call the \textbf{Phong illumination model}. We interaction between light and surface, but it's not a real physical model! It's a common and fast approximation.
+
+Let's build up the model iteratively
+
+\begin{enumerate}
+    \item $I = k_e$, where $k_e$ is the intrinsic shade of the object (color)  
+    \item $I = k_a I_a$, where $k_a$ is the ambient reflection coefficient of the object, $I_a$ is the ambient intensity of the light   
+    \item $I(\kappa) = k_a(\kappa) I_a(\kappa)$, since the above is actually dependent on wavelength, and we do it over all RGB values
+    \item $I = I_l \cos \theta$, where this is Lambert's cosine law, a surface reflect light equally in all directions (or $k_dI_l\mathbf{N\cdot L}_+$, where N is the normal at the surface point, L the direction to the light source, which we can rise to $n_s$ for how reflective a material is ). 
+    \item Point 4 is intensity, but physics say intensity of a point light source drops off with its distance squared. Normally multiply with $\frac{1}{d^2}$, but that's too harsh so we multiply with $f(d) = min(1, \frac{1}{a+bd+cd^2})$, $a,b,c$ chosen by the user
+    \item For spots, where the light is perfectly reflected we have a \textbf{specular reflection}, so $I = \begin{cases}
+        I_l & \text{if V = R}\\
+        0 & \text{otherwise}
+    \end{cases}$, where V is the viewing angle, R the reflection angle
+    \item Since we have multiple light, we can take the sum of each light and we can put them all together for the Phong Illumination Model \[
+    I = k_e + k_aI_a + \sum_{i} f(d_i) I_{li} [k_d(\mathbf{N\cdot L_i}) + k_s(\mathbf{V\cdot R})_+^{n_s}] 
+    .\] 
+\end{enumerate}
+
+\subsubsection*{Blinn-phong shading}
+Computation of $\mathbf{R}$ is expensive and time consuming, so there is the following approximation
+\[
+\mathbf{V\cdot R \approxeq N \cdot H}
+.\], where $\mathbf{H = \frac{L+V}{|L+V|}}$ 
+
+
+%TODO: include page 34 and 41
+
+
+\subsection{Interpolative Shading}
+Smooth surface are approximated by polygonal facets, since it gives us better photorealism. For shading, we use a term called \textbf{interpolative shading}. Since we are having polygons and triangles, we need to have the visual appeareance that's curved. 
+\newline\noindent
+\textbf{Assumptions:}
+\begin{itemize}
+    \item Approximate normal can be computed for each vertex by averaging the normal of the polygons sharing that vertex
+    \item The shading of a pixel can be obtained by a \textit{bilinear interpolation} or \textit{barycentric-coordinate-based interpolation} of the values of the adjacent vertices  
+\end{itemize}
+
+\subsubsection*{Gouraud Shading}
+\begin{itemize}
+    \item Calculate the intensity at each vertex using a local reflection model
+    \item Intensities of interior pixels are determined by bilinearly interpolating the vertices'intesities
+    \item There are some equations but I dont understand them %TODO: understand this?? page 47
+\end{itemize}
+
+There are some flaws: \begin{itemize}
+    \item Highlight anomalies, if the highlight is inside a polygon, the shading may fail because are no intensities recorded at the vertices. Solution: smaller and more polygons
+    \item Mach banding: Intensity changed occuring at the boundaries of polygons (of high curvature). Solution: more polygons
+\end{itemize}
+
+\subsubsection*{Phong Shading}
+ \begin{itemize}
+    \item Instead of interpolating the vertex intensities, we interpolate the vertex normal vector
+    \item No interior highlight problem
+    \item More expensive Gouraud shading, since we do it at each interior surface point
+ \end{itemize}
+
+\subsection{Lighting in OGL}
+Lighting in OGL is typically done by:
+\begin{itemize}
+    \item Light Source: \begin{itemize}
+        \item Ambient light source: glLightModelfv(GL\_LIGHT\_MODEL\_AMBIENT, ...)
+        \item Directional light: see glLightfv, w is set to 0
+        \item Point light: see glLightfv, w is nonzero
+        \item Spot light: CUTOFF and EXPONENT terms
+    \end{itemize}
+    \item Surface Property: Material \begin{itemize}
+        \item Use glMaterial(arg1, arg2, input values)
+        \item arg1: GL\_FRONT and GL\_BACK, etc.
+        \item arg2: GL\_EMISSION, GL\_AMBIENT, GL\_DIFFUSE, GL\_SPECULAR, GL\_SHINNES, etc. \newline (terms in Phong model)
+        \item Input values: corresponding coefficient for RGBA 
+    \end{itemize}
+    
+\end{itemize}
+
+Important notes: \begin{itemize}
+    \item Check the OGL Red book, simmilar to Phong Illumination Model
+    \item glEnable (GL\_LIGHTING), uses its own illumination model, only use it when you need shading, because glColor is much faster
+    \item OGL needs normals, call glNormal befre glVertex (one per face for face normal, one per vertex for vertex normal)
+    \item Try to provide unit vector to OGL when calling glNormal, else if it's not a unit vector or if you have scaling/shearng then you need to call glEnable(GL\_NORMALIZE)
+    \item OGL shader program GLSL and CG, or implement yourself
+\end{itemize}
+
+
 
 
 \end{document}

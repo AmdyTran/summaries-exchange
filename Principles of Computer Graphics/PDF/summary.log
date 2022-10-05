@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.5)  27 SEP 2022 11:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.5)  5 OCT 2022 11:37
 entering extended mode
 **"c:/Users/andyt/Documents/ETHZ/Semester 5/Principles of Computer Graphics/summary.tex"
 ("c:/Users/andyt/Documents/ETHZ/Semester 5/Principles of Computer Graphics/summary.tex"
@@ -215,64 +215,96 @@ File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen160
 \Gin@req@width=\dimen161
+) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/subfig\subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+ (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+ (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen162
+\captionmargin@=\dimen163
+\captionwidth=\dimen164
+\caption@tempdima=\dimen165
+\caption@indent=\dimen166
+\caption@parindent=\dimen167
+\caption@hangindent=\dimen168
+Package caption Info: Standard document class detected.
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 18.
+\c@caption@flags=\count274
+\c@continuedfloat=\count275
+Package caption Info: hyperref package is loaded.
+)
+\c@KVtest=\count276
+\sf@farskip=\skip53
+\sf@captopadj=\dimen169
+\sf@capskip=\skip54
+\sf@nearskip=\skip55
+\c@subfigure=\count277
+\c@subfigure@save=\count278
+\c@lofdepth=\count279
+\c@subtable=\count280
+\c@subtable@save=\count281
+\c@lotdepth=\count282
+\sf@top=\skip56
+\sf@bottom=\skip57
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 20.
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorithm2e.sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count274
+\c@AlgoLine=\count283
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\algocf@hangindent=\skip53
+\algocf@hangindent=\skip58
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count275
+\c@checkoddpage=\count284
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/relsize\relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip54
-\skiplinenumber=\skip55
-\skiprule=\skip56
-\skiphlne=\skip57
-\skiptext=\skip58
-\skiplength=\skip59
-\algomargin=\skip60
-\skipalgocfslide=\skip61
-\algowidth=\dimen162
-\inoutsize=\dimen163
-\inoutindent=\dimen164
-\interspacetitleruled=\dimen165
-\interspacealgoruled=\dimen166
-\interspacetitleboxruled=\dimen167
-\algocf@ruledwidth=\skip62
+\skiptotal=\skip59
+\skiplinenumber=\skip60
+\skiprule=\skip61
+\skiphlne=\skip62
+\skiptext=\skip63
+\skiplength=\skip64
+\algomargin=\skip65
+\skipalgocfslide=\skip66
+\algowidth=\dimen170
+\inoutsize=\dimen171
+\inoutindent=\dimen172
+\interspacetitleruled=\dimen173
+\interspacealgoruled=\dimen174
+\interspacetitleboxruled=\dimen175
+\algocf@ruledwidth=\skip67
 \algocf@inoutbox=\box49
 \algocf@inputbox=\box50
-\AlCapSkip=\skip63
-\AlCapHSkip=\skip64
-\algoskipindent=\skip65
+\AlCapSkip=\skip68
+\AlCapHSkip=\skip69
+\algoskipindent=\skip70
 \algocf@nlbox=\box51
 \algocf@hangingbox=\box52
 \algocf@untilbox=\box53
-\algocf@skipuntil=\skip66
+\algocf@skipuntil=\skip71
 \algocf@capbox=\box54
-\algocf@lcaptionbox=\skip67
-\algoheightruledefault=\skip68
-\algoheightrule=\skip69
-\algotitleheightruledefault=\skip70
-\algotitleheightrule=\skip71
-\c@algocfline=\count276
-\c@algocfproc=\count277
-\c@algocf=\count278
+\algocf@lcaptionbox=\skip72
+\algoheightruledefault=\skip73
+\algoheightrule=\skip74
+\algotitleheightruledefault=\skip75
+\algotitleheightrule=\skip76
+\c@algocfline=\count285
+\c@algocfproc=\count286
+\c@algocf=\count287
 \algocf@algoframe=\box55
 \algocf@algobox=\box56
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcolorbox.sty
 Package: tcolorbox 2020/10/09 version 4.42 text color boxes
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex
 \pgfutil@everybye=\toks22
-\pgfutil@tempdima=\dimen168
-\pgfutil@tempdimb=\dimen169
+\pgfutil@tempdima=\dimen176
+\pgfutil@tempdimb=\dimen177
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-common-lists.tex)) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
 \pgfutil@abb=\box57
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
@@ -287,26 +319,26 @@ Package: pgfsys 2020/10/01 v3.1.6a (3.1.6a)
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks25
 ))
-\pgf@x=\dimen170
-\pgf@y=\dimen171
-\pgf@xa=\dimen172
-\pgf@ya=\dimen173
-\pgf@xb=\dimen174
-\pgf@yb=\dimen175
-\pgf@xc=\dimen176
-\pgf@yc=\dimen177
-\pgf@xd=\dimen178
-\pgf@yd=\dimen179
+\pgf@x=\dimen178
+\pgf@y=\dimen179
+\pgf@xa=\dimen180
+\pgf@ya=\dimen181
+\pgf@xb=\dimen182
+\pgf@yb=\dimen183
+\pgf@xc=\dimen184
+\pgf@yc=\dimen185
+\pgf@xd=\dimen186
+\pgf@yd=\dimen187
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
-\c@pgf@counta=\count279
-\c@pgf@countb=\count280
-\c@pgf@countc=\count281
-\c@pgf@countd=\count282
+\c@pgf@counta=\count288
+\c@pgf@countb=\count289
+\c@pgf@countc=\count290
+\c@pgf@countd=\count291
 \t@pgf@toka=\toks26
 \t@pgf@tokb=\toks27
 \t@pgf@tokc=\toks28
-\pgf@sys@id@count=\count283
+\pgf@sys@id@count=\count292
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
 File: pgf.cfg 2020/10/01 v3.1.6a (3.1.6a)
 )
@@ -317,8 +349,8 @@ File: pgfsys-pdftex.def 2020/10/01 v3.1.6a (3.1.6a)
 File: pgfsys-common-pdf.def 2020/10/01 v3.1.6a (3.1.6a)
 ))) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgfsyssoftpath@smallbuffer@items=\count284
-\pgfsyssoftpath@bigbuffer@items=\count285
+\pgfsyssoftpath@smallbuffer@items=\count293
+\pgfsyssoftpath@bigbuffer@items=\count294
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 )) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
@@ -339,52 +371,52 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
 Package: pgfcore 2020/10/01 v3.1.6a (3.1.6a)
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
-\pgfmath@dimen=\dimen180
-\pgfmath@count=\count286
+\pgfmath@dimen=\dimen188
+\pgfmath@count=\count295
 \pgfmath@box=\box58
 \pgfmath@toks=\toks29
 \pgfmath@stack@operand=\toks30
 \pgfmath@stack@operation=\toks31
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex))) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count287
+\c@pgfmathroundto@lastzeros=\count296
 )) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgf@picminx=\dimen181
-\pgf@picmaxx=\dimen182
-\pgf@picminy=\dimen183
-\pgf@picmaxy=\dimen184
-\pgf@pathminx=\dimen185
-\pgf@pathmaxx=\dimen186
-\pgf@pathminy=\dimen187
-\pgf@pathmaxy=\dimen188
-\pgf@xx=\dimen189
-\pgf@xy=\dimen190
-\pgf@yx=\dimen191
-\pgf@yy=\dimen192
-\pgf@zx=\dimen193
-\pgf@zy=\dimen194
+\pgf@picminx=\dimen189
+\pgf@picmaxx=\dimen190
+\pgf@picminy=\dimen191
+\pgf@picmaxy=\dimen192
+\pgf@pathminx=\dimen193
+\pgf@pathmaxx=\dimen194
+\pgf@pathminy=\dimen195
+\pgf@pathmaxy=\dimen196
+\pgf@xx=\dimen197
+\pgf@xy=\dimen198
+\pgf@yx=\dimen199
+\pgf@yy=\dimen256
+\pgf@zx=\dimen257
+\pgf@zy=\dimen258
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgf@path@lastx=\dimen195
-\pgf@path@lasty=\dimen196
+\pgf@path@lastx=\dimen259
+\pgf@path@lasty=\dimen260
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgf@shorten@end@additional=\dimen197
-\pgf@shorten@start@additional=\dimen198
+\pgf@shorten@end@additional=\dimen261
+\pgf@shorten@start@additional=\dimen262
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 \pgfpic=\box59
 \pgf@hbox=\box60
 \pgf@layerbox@main=\box61
-\pgf@picture@serial@count=\count288
+\pgf@picture@serial@count=\count297
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgflinewidth=\dimen199
+\pgflinewidth=\dimen263
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgf@pt@x=\dimen256
-\pgf@pt@y=\dimen257
-\pgf@pt@temp=\dimen258
+\pgf@pt@x=\dimen264
+\pgf@pt@y=\dimen265
+\pgf@pt@temp=\dimen266
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
@@ -393,12 +425,12 @@ File: pgfcoreobjects.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 File: pgfcorepathprocessing.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgfarrowsep=\dimen259
+\pgfarrowsep=\dimen267
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2020/10/01 v3.1.6a (3.1.6a)
-\pgf@max=\dimen260
-\pgf@sys@shading@range@num=\count289
-\pgf@shadingcount=\count290
+\pgf@max=\dimen268
+\pgf@sys@shading@range@num=\count298
+\pgf@shadingcount=\count299
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2020/10/01 v3.1.6a (3.1.6a)
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
@@ -419,8 +451,8 @@ File: pgfmoduleshapes.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 File: pgfmoduleplot.code.tex 2020/10/01 v3.1.6a (3.1.6a)
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2020/10/01 v3.1.6a (3.1.6a)
-\pgf@nodesepstart=\dimen261
-\pgf@nodesepend=\dimen262
+\pgf@nodesepstart=\dimen269
+\pgf@nodesepend=\dimen270
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2020/10/01 v3.1.6a (3.1.6a)
 )) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
@@ -434,15 +466,15 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count291
+\etb@tempcnta=\count300
 )
 \tcb@titlebox=\box64
 \tcb@upperbox=\box65
 \tcb@lowerbox=\box66
 \tcb@phantombox=\box67
-\c@tcbbreakpart=\count292
-\c@tcblayer=\count293
-\c@tcolorbox@number=\count294
+\c@tcbbreakpart=\count301
+\c@tcblayer=\count302
+\c@tcolorbox@number=\count303
 \tcb@temp=\box68
 \tcb@temp=\box69
 \tcb@temp=\box70
@@ -450,30 +482,30 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 \tcb@out=\write4
 \tcb@record@out=\write5
 )
-\c@theorem=\count295
+\c@theorem=\count304
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count296
+\l__kernel_color_stack_int=\count305
 \l__pdf_internal_box=\box72
 ) ("c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.aux")
 \openout1 = `summary.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
-LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -483,15 +515,15 @@ LaTeX Font Info:    ... okay on input line 47.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(57.81621pt, 498.66258pt, 57.81621pt)
-* v-part:(T,H,B)=(57.81621pt, 679.33757pt, 57.81621pt)
+* h-part:(L,W,R)=(50.58878pt, 513.11745pt, 50.58878pt)
+* v-part:(T,H,B)=(50.58878pt, 693.79243pt, 50.58878pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=498.66258pt
-* \textheight=679.33757pt
-* \oddsidemargin=-14.45378pt
-* \evensidemargin=-14.45378pt
-* \topmargin=-51.45378pt
+* \textwidth=513.11745pt
+* \textheight=693.79243pt
+* \oddsidemargin=-21.68121pt
+* \evensidemargin=-21.68121pt
+* \topmargin=-58.68121pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=11.0pt
@@ -509,7 +541,7 @@ LaTeX Font Info:    ... okay on input line 47.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 47.
+Package hyperref Info: Link coloring ON on input line 51.
 (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
@@ -517,37 +549,40 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count297
+\c@section@level=\count306
 )
-LaTeX Info: Redefining \ref on input line 47.
-LaTeX Info: Redefining \pageref on input line 47.
-LaTeX Info: Redefining \nameref on input line 47.
+LaTeX Info: Redefining \ref on input line 51.
+LaTeX Info: Redefining \pageref on input line 51.
+LaTeX Info: Redefining \nameref on input line 51.
  ("c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.out") ("c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.out")
 \@outlinefile=\write6
 \openout6 = `summary.out'.
 
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count298
-\scratchdimen=\dimen263
+\scratchcounter=\count307
+\scratchdimen=\dimen271
 \scratchbox=\box73
-\nofMPsegments=\count299
-\nofMParguments=\count300
+\nofMPsegments=\count308
+\nofMParguments=\count309
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count301
-\MPscratchDim=\dimen264
-\MPnumerator=\count302
-\makeMPintoPDFobject=\count303
+\MPscratchCnt=\count310
+\MPscratchDim=\dimen272
+\MPnumerator=\count311
+\makeMPintoPDFobject=\count312
 \everyMPtoPDFconversion=\toks35
 ) (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 57.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 61.
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 57.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 61.
  (C:\Users\andyt\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) ("c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.toc" [1
@@ -557,31 +592,69 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout7 = `summary.toc'.
 
  [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 118--120
+Underfull \hbox (badness 10000) in paragraph at lines 124--126
 
  []
 
 [4] [5] [6]
-Underfull \hbox (badness 10000) in paragraph at lines 269--272
+Underfull \hbox (badness 10000) in paragraph at lines 274--277
 
  []
 
-[7] [8] [9] [10] [11] ("c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.aux")
+[7] [8]
+<./img//tf.png, id=457, 356.83313pt x 237.13594pt>
+File: ./img//tf.png Graphic file (type png)
+<use ./img//tf.png>
+Package pdftex.def Info: ./img//tf.png  used on input line 382.
+(pdftex.def)             Requested size: 205.24384pt x 136.39551pt.
+<./img//ts.png, id=459, 114.1866pt x 75.8835pt>
+File: ./img//ts.png Graphic file (type png)
+<use ./img//ts.png>
+Package pdftex.def Info: ./img//ts.png  used on input line 384.
+(pdftex.def)             Requested size: 205.24384pt x 136.41301pt.
+ [9 <./img//tf.png> <./img//ts.png>]
+<./img//mv_steps.png, id=475, 805.20825pt x 443.256pt>
+File: ./img//mv_steps.png Graphic file (type png)
+<use ./img//mv_steps.png>
+Package pdftex.def Info: ./img//mv_steps.png  used on input line 423.
+(pdftex.def)             Requested size: 410.49551pt x 225.9764pt.
+ [10 <./img//mv_steps.png>] [11] [12]
+Overfull \hbox (16.63362pt too wide) in paragraph at lines 563--567
+[] [] [] [] [] [] [] [] []$ 
+ []
+
+[13] [14]
+<./img//par_vs_pers.png, id=532, 501.67426pt x 227.04825pt>
+File: ./img//par_vs_pers.png Graphic file (type png)
+<use ./img//par_vs_pers.png>
+Package pdftex.def Info: ./img//par_vs_pers.png  used on input line 630.
+(pdftex.def)             Requested size: 410.49551pt x 185.78581pt.
+ [15 <./img//par_vs_pers.png>] [16] [17] [18] [19]
+<./img//z_buff_implem.png, id=610, 512.51476pt x 375.804pt>
+File: ./img//z_buff_implem.png Graphic file (type png)
+<use ./img//z_buff_implem.png>
+Package pdftex.def Info: ./img//z_buff_implem.png  used on input line 891.
+(pdftex.def)             Requested size: 410.49551pt x 301.00487pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[20] [21 <./img//z_buff_implem.png>] [22] [23] [24] [25] ("c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.aux")
 Package rerunfilecheck Info: File `summary.out' has not changed.
-(rerunfilecheck)             Checksum: 71562CEF5DCC533D0D9CC0002498FD97;3356.
+(rerunfilecheck)             Checksum: 0BBE73560D8F8BCE9D919807DC1C8BCF;5550.
  ) 
 Here is how much of TeX's memory you used:
- 17781 strings out of 479811
- 333798 string characters out of 2870178
- 626480 words of memory out of 3000000
- 34313 multiletter control sequences out of 15000+200000
- 543487 words of font info for 60 fonts, out of 3000000 for 9000
+ 19359 strings out of 479811
+ 362538 string characters out of 2870178
+ 654697 words of memory out of 3000000
+ 35728 multiletter control sequences out of 15000+200000
+ 544407 words of font info for 63 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,10n,96p,496b,409s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\andyt\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on "c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.pdf" (11 pages, 250419 bytes).
+ 84i,10n,96p,520b,468s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\andyt\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/andyt/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on "c:\Users\andyt\Documents\ETHZ\Semester 5\Principles of Computer Graphics\PDF\summary.pdf" (25 pages, 572119 bytes).
 PDF statistics:
- 426 PDF objects out of 1000 (max. 8388607)
- 121 named destinations out of 1000 (max. 500000)
- 357 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 781 PDF objects out of 1000 (max. 8388607)
+ 264 named destinations out of 1000 (max. 500000)
+ 614 words of extra memory for PDF output out of 10000 (max. 10000000)
 

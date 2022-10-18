@@ -1,0 +1,337 @@
+% Basic stuff
+\documentclass[a4paper]{article}
+\usepackage[10pt]{extsizes}
+
+% 3 column landscape layout with fewer margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+\Ncolumn[<9]{3}
+\onecolumn[9]
+
+% define nice looking boxes
+\usepackage[many]{tcolorbox}
+
+% a base set, that is then customised
+\tcbset {
+	base/.style={
+		boxrule=0mm,
+		leftrule=1mm,
+		left=1.75mm,
+		arc=0mm, 
+		fonttitle=\bfseries, 
+		colbacktitle=black!10!white, 
+		coltitle=black, 
+		toptitle=0mm, 
+		bottomtitle=0mm,
+        bottom=0mm,
+        top=0mm,
+		title={#1}
+	}
+}
+
+\definecolor{brandblue}{rgb}{0.34, 0.7, 1}
+\newtcolorbox{mainbox}[1]{
+	colframe=brandblue, 
+	base={#1}
+}
+
+\newtcolorbox{subbox}[1]{
+	colframe=black!20!white,
+	base={#1}
+}
+
+% Mathematical typesetting & symbols
+\usepackage{amsthm, mathtools, amssymb} 
+\usepackage{marvosym, wasysym}
+\allowdisplaybreaks
+
+% Tables
+\usepackage{tabularx, multirow}
+\usepackage{makecell}
+\usepackage{booktabs}
+\renewcommand*{\arraystretch}{2}
+
+% Make enumerations more compact
+\usepackage{enumitem}
+\setitemize{itemsep=0pt}
+\setenumerate{itemsep=0pt}
+
+% To include sketches & PDFs
+\usepackage{graphicx}
+
+% For hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true
+}
+
+\usepackage{titlesec}
+\titlespacing*{\section}
+{0pt}{0ex}{1ex}
+\titlespacing*{\subsection}
+{0pt}{0ex}{1ex}
+
+
+% section smaller
+\usepackage{sectsty}
+\sectionfont{\large}
+\subsectionfont{\small}
+
+
+\begin{document}
+\section{Linear Algebra}
+\begin{itemize}
+    \item Linear Indepent: m vectors are \textbf{l.i.} if $c_1 \mathbf{x_1} + ... + c_m\mathbf{x_m} = \mathbf{0}$, only when $c_1 = ... = c_d = \mathbf{0}$ 
+    \item Standard basis of $\mathbb{R}^d$ is composed of $e_1, ..., e_d$    
+    \item Euclidean length: $\sqrt{x_1^2 + \dots + x_d^2}$ 
+\end{itemize}
+
+
+\begin{mainbox}{Norm function}
+    A function $\left\lVert \cdot \right\rVert: \mathbb{R}^d \to \mathbb{R}$ 
+    is called a norm if it satisfies \begin{enumerate}
+        \item $\left\lVert x\right\rVert \geq 0 \forall \mathbf{x}\in \mathbb{R}^d$ and for $\mathbf{x}\neq \mathbf{0}$ we have $\left\lVert x\right\rVert > 0$ 
+        \item $\forall c \in \mathbb{R}, $ $|c|\left\lVert x\right\rVert $  
+        \item $\forall \mathbf{x,y}\in \mathbb{R}^d, \left\lVert x+y\right\rVert \leq \left\lVert x\right\rVert + \left\lVert y\right\rVert $   
+    \end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{$l_p-$norm function}
+    The norm is defined as $\left\lVert x\right\rVert_p := (|x_1|^p + \dots + |x_d|^p)^\frac{1}{p}$ 
+\end{subbox}
+\textbf{Note:} $\left\lVert x\right\rVert_p = \lim_{p\to \infty}\left\lVert x\right\rVert_p = \underset{1\leq i \leq d}{max} |x_i| $ 
+\newline
+Also, $l_p-norms$ are decreasing in $p\geq 1$, namely $1 \leq p \leq q \leq \infty \Rightarrow \left\lVert x\right\rVert_p \geq \left\lVert x\right\rVert_q$.
+\newline
+The inner product $\langle x,y \rangle = x^Ty$ is positive-definite for all $\langle x,x\rangle$ , symmetric for all $\mathbf{x,y}$ , and linear for all $\mathbf{x_1, x_2, y}, c\in\mathbb{R} $ . 
+\newline
+\textbf{Cauchy-Schwartz inequality: } $|\langle x,y\rangle| \leq \left\lVert x\right\rVert \left\lVert y\right\rVert$. As a result we have $\cos \theta = \frac{\langle x,y\rangle}{\left\lVert x\right\rVert\left\lVert y\right\rVert  }$   
+
+\begin{mainbox}{Mutual Orthogonal}
+    A set of vectors is called \textbf{mutually orthogonal} if $\forall i \neq j : <x^{(i)}, x^{(j)}> = 0$ and a set of mutually orthogonal vectors is linearly independent.
+\end{mainbox}
+\textbf{Note:} we call a set orthonormal if $<x^{(i)}, x^{(j)}> \delta_i,j$  
+
+Matrix notation:
+$A= \left( \begin{smallmatrix} a_{1,1} & a_{1,2} & \dots & a_{1,n} \\
+a_{2,1} & a_{2,2} & \dots & a_{2,n} \\
+. & . & \dots & .\\
+a_{m,1} & a_{m,2} & \dots & a_{m,n} \end{smallmatrix} \right)$ 
+
+The product is defined as $\left[AB\right]_{i,j} = \sum_{k=1}^{n} a_{i,k}b_{k,j}$ 
+
+\begin{itemize}
+    \item Range of matrix, the subspace of all vectors following from linear combinations of A's columns: $\mathcal{R}(A) := \{Ax : x\in\mathbb{R}^n \}$
+    \item Rank of matrix: dimension of subspace $\mathcal{R}(A)$
+    \item $Rank(A_{m\times n}) \leq min(m,n)$ and full-rank if $Rank(A) = min(m,n)$
+    \item Null space of a matrix, the subspace of all vectors which A maps to $\mathbf{0}$: $\mathcal{N}(A) := \{x: Ax =\mathbf{0}\}$
+    \item Determinant: $det(A) = \sum_{j=1}^{n} (-1)^{i+j}a_{i,j}det(A_{(i,j)})$     
+\end{itemize}
+
+Equivalent sayings:
+\begin{itemize}
+    \item A is invertible
+    \item A is non-singular, $det(A) \neq 0$ 
+    \item A is full rank, $Rank(A) = n$
+    \item A has linearly independent rows or columns
+    \item A has a zero null space $\mathcal{N}(A) = 0$
+    \item A has full range $\mathcal{R}(A) = 0$   
+\end{itemize}
+
+\begin{subbox}{Eigenvectors and Eigenvalues}
+    For a vector $\mathbf{v} \neq \mathbf{0}$, it's an eigenvector for its eigenvalue $\lambda$ such that: $Av = \lambda v$    
+    
+\end{subbox}
+Can be calculated by solving $det(A - \lambda I_n)$  
+
+\begin{mainbox}{Spectral theorem}
+    For a symmetric matrix A there exists a spectral decomposition. Such that \[
+    A = \sum_{i=1}^{n} \lambda_i v_i v_i^T = V \Lambda V^T
+    .\],
+    where $ V= [v_1, ..., V_n]$ and $\Lambda = diag(\lambda_1, \dots, \lambda_n)$ such that $\lambda_1 \geq \dots \geq \lambda_n$ and $v_i$ is normalized 
+\end{mainbox}
+
+A symmetric matrix is called PSD if for every vecotr $x\in\mathbb{R}^n$ we have $x^TAx \geq 0$. Strictly definite if it holds strictly for $\mathbf{x} \neq \mathbf{0}$   
+
+Theorem:
+A is psd $\Leftrightarrow $ all its eigenvalues are non-negative $\Leftrightarrow$ we have a matrix H such that $A=HH^T$  
+
+\begin{subbox}{Partial Order for Matrices}
+    \begin{itemize}
+        \item $A \succeq B$ if $A-B$ is PSD
+        \item $A\succ B$ if $A-B$ is positive definite (PD)
+        \item $A\preceq B$ if $A-B$ is negative semidefinite
+        \item $A \prec B$ if $A-B$ is negative definite      
+    \end{itemize}
+    $A\nsucceq  B$ does not imply $A \preceq B$ 
+    
+\end{subbox}
+
+
+
+
+\section{(Multivariable) Calculus Recap}
+\section*{Lecture 5}
+\begin{subbox}{Special sets}
+    Epigraph:
+$
+    epi f := \{(\mathbf{x},t): \mathbf{x} \in \mathbb{R}^n, t \geq f(\mathbf{x})\}
+     $\newline
+    Contour set:
+    $
+    C_f(t) := \{\mathbf{x}\in \mathbb{R}^n: f(\mathbf{x}) = t\}
+      $\newline
+    Hyperplane:
+    $
+    H = \{\mathbf{x} \in \mathbb{R}^n: \mathbf{a}^Tx = b \} 
+    $\newline
+    Halfspace (change $\leq$ to $\geq$ for +  )
+    $H_- = \{\mathbf{x} \in \mathbb{R}^n: \mathbf{a}^Tx \leq b \} 
+    $\newline
+
+
+\end{subbox}
+
+A function is linear if $\forall x,y\in\mathbb{R}^n, c\in \mathbb{R} f(cx + y) = cf(x) + f(y)$ 
+
+\begin{subbox}{General Quadratic Form}
+    We can write a quadratic function, in terms of $A\in \mathbb{R}^{n\times n}, b\in \mathbb{R}^n, c\in \mathbb{R}$:
+    \[
+    f(\mathbf{x}) = \frac{1}{2}\mathbf{x}^TA\mathbf{x} + \mathbf{b}^T\mathbf{x} + c
+    .\] 
+\end{subbox}
+
+Common gradients and hessians:
+\begin{mainbox}{Gradient and Hessians}
+    A function $f: \mathbb{R}^n \to \mathbb{R}$ has a gradient defined as $\nabla f(x) = \left[\frac{\delta f(x)}{\delta x_1}, \dots, \frac{\delta f(x)}{\delta x_n}\right]^T$ and hessian is the second derivative (square matrix.)   
+\end{mainbox}
+\textbf{Math Rules:} 
+\begin{itemize}
+    \item Derivative for $f:\mathbb{R}^n \to \mathbb{R}^m$ :
+    $ df(x) = \left[\begin{smallmatrix} 
+        \frac{df_1}{dx_1} & ... & \frac{df_1}{dx_n}\\
+        \frac{df_2}{dx_1} & ... & \frac{df_2}{dx_n}\\
+        ... & ... & ... \\
+        \frac{df_m}{dx_1} & ... & \frac{df_m}{dx_n}
+    \end{smallmatrix}\right] \in \mathbb{R}^{m\times n}$ 
+    \item Gradient: we can calculate gradient for $f: \mathbb{R}^n \to \mathbb{R}$. It's defined as $\nabla f(x) = df(x)^T$ 
+    \item Chain rule: $d(g\circ f)(x) = dg(f(x)) \cdot df(x)$ 
+    \item Product rule: $g(x)h(x) = dg(x)h(x) + g(x)dh(x)$ 
+    \item $f(x)= \left\lVert Ax-b\right\rVert ^2, \nabla f(x) = 2A^T(Ax-b), Hess_f(x) = 2A^TA$
+    \item $f(x) = \left\lVert Ax-b\right\rVert, \frac{A^T(Ax-b)}{\left\lVert Ax-b\right\rVert}, Hess_f(x)= \frac{A^TA}{\left\lVert Ax-b\right\rVert }  - \frac{(A^TAx-b)((x^TA^T-b^T)A)}{\left\lVert Ax-b\right\rVert^3 }$  
+    \item $d\mathbf{0} = 0, d(\alpha \mathbf{X}) = \alpha d\mathbf{X}, d(\mathbf{X^{-1}}) = -\mathbf{X^{-1}}(\mathbf{dX})X^{-1}, d\mathbf{X}^T = (d\mathbf{X})^T, \frac{dx^Ta}{dx} = \frac{da^Tx}{dx} a, \frac{dx^TAx}{dx} (A+A^T)x, \frac{d}{ds}(x-As)^TW(x-As) = -2A^TW(x-As), \frac{d}{dx}(x-As)^TW(x-As) = 2W(x-As)$    
+\end{itemize}
+
+
+
+We can approximate functions using gradients and hessians:
+$
+f(x) \approx f(\mathbf{x_0}) + \nabla f(\mathbf{x_0})^T (\mathbf{x-x_0}) +
+\newline
+ \frac{1}{2}(\mathbf{x-x_0})^T H_f(\mathbf{x_0})(\mathbf{x-x_0})
+$
+
+\begin{mainbox}{Affine Functions}
+    Let $f\in\mathbb{R}^d \to \mathbb{R}$ be a multivariable function. Then f is an affine function iff:
+    $
+    \forall x,y\in \mathbb{R}^d, \theta \in [0,1]: f(\theta x + (1-\theta)y) = \theta f(x) + (1-\theta)f(y)
+    $
+\end{mainbox}
+\textbf{Convex function (one dimensional):} if we can replace $=$ above with $\leq$. A function f is \textbf{concave}  if $-f(x)$ is convex.
+\newline
+\textbf{Convex (multivariable):} $||\mathbf{x}||$, $||\mathbf{x}||^p, p\geq1$, $\log(\sum_i^d e^{x_i})$. \textbf{Concave:} $\sum_i^d x_i log(\frac{1}{x_i}), \newline
+dom(f)=R^d_+$, $(x_1 x_2 \dots x_d)^\frac{1}{d}, dom(f)= \mathbb{R}^d_+$      
+\newline
+\textbf{Proposition:} A \textbf{set S is convex} iff $\forall x,y\in S, \theta\in[0,1]: \theta x + (1-\theta)y \in S$
+\newline
+\textbf{Examples of convex functions: } $x^p, p \geq 1$ or $p \leq 0$, $|x|^p, p\geq 1$, $e^{ax+b}$. \textbf{Concave:} $x^p, x\in \mathbb{R}_+, 0\leq p \leq 1$        
+\begin{subbox}{Sublevel set}
+    Let $S_f(t) = \{\mathbf{x} \in dom(f): f(\mathbf{x}) \leq t$. If f is convex, then $S_f(t)$ is a convex set for every t.  
+\end{subbox}
+
+\textbf{Examples}  of convex sets: hyperplanes, halfspaces, norm balls $(\{ \mathbf{x}: \left\lVert x \right\rVert \leq \epsilon )$ %TODO: maybe ill define it later before.
+\newline
+\textbf{Convexity preserving operations:} intersection, affine and inverse-affine mappings, linear fractional functions 
+\newline
+How to proof a function is convex:
+\begin{enumerate}
+    \item Verify the inequality
+    \item Proof over epigraph and sub-level sets
+    \item Gradients and hessians
+    \item Convexity preserving operations
+\end{enumerate}
+\textbf{Convexity preserving operations:} positive scalar multiplication, addition of two convex functions, composition with affine functions $f(\mathbf{Ax+b})$, pointwise maximum $max\{f_1(x), \dots, f_k(\mathbf{x})\}$ if each $f_i$ is convex, composition $f(g(x))$, where f,g both convex and $f$ non-decreasing in every entry.
+
+\begin{mainbox}{First-order convexity condition}
+    A differentiable function f is convex iff its domain is convex and $\forall x,y\in dom(f): f(y) \geq f(x) + \nabla f(x)^T (y-x)$ 
+\end{mainbox}
+\begin{subbox}{Second-order convexity}
+    Same as above, but this $\forall \mathbf{x}\in dom(f) : H_f(\mathbf{x}) \succeq 0$ (so PSD)  
+\end{subbox}
+
+
+\section{Optimization Problems}
+Let the optimization problem be formulated as $\underset{x\in\mathbb{R}^d}{min}f(x)$ subject to $g_i(x) \leq 0$ for all $i$   
+\begin{itemize}
+    \item NP-Hard problems: \textit{proven}  to be intractable
+    \item  Linear Programming Problems: if a problem can be rewritten as $\underset{x\in\mathbb{R}^d}{min} \textbf{c} ^T\textbf{x} $ subject to $A\textbf{x}  \leq \textbf{b} $ and $\textbf{x} \geq\textbf{0} $, with $f$ and $g_i \forall i$ affine.   If f is non-Affine, then it's a non linear programming task
+    \item Convex optimization problem: if $f, g_i$ are all convex and we can rewrite it as $\underset{x\in\mathbb{R}^d}{\min}f(x) $ subject to $g_(x) \leq 0$ for all $i$ or $Ax=b$, else non-convex  
+\end{itemize}
+
+\begin{mainbox}{How to}
+    \begin{itemize}
+        \item Define optimization variables, i.e. $x\in\mathbb{R}^d$
+        \item Define objective function 
+        \item Define feasible set, or constraint functions, also must $x_i \geq 0$ for example? 
+    \end{itemize}
+    
+\end{mainbox}
+
+Examples:
+\begin{itemize}
+    \item LP: Transport task, manufacturing task, sorting task
+    \item Convex problems: LP-problems, projection problem, distance computation problem, ridge regression
+\end{itemize}
+
+\textbf{Definition:} two problems are called \textit{equivalent} if their optimal solutions are in one-to-one correspondence.  
+
+Feasible set:
+$S=\{x\in\mathbb{R}^d: g_i(x) \leq \text{ for all } 1\leq i \leq m\}$ and $x^*$ is called the globally optimal solution if it minimized the object function. We also have a locally optimal solution. In convex problems they are the same.
+
+
+
+\section{Extra}
+\begin{mainbox}{Gram-Schmidt: orthogonalize a basis}
+ \begin{enumerate}
+    \item Let $proj_u(v) = \frac{\langle u, v \rangle}{\langle u, u\rangle}u$ 
+    \item $u_1 = v_1 \Rightarrow e_1 = \frac{u_1}{\left\lVert u_1\right\rVert } $
+    \item $u_2 = v_2 - proj_{u_1}(v_2) \Rightarrow e_2 = \frac{u_2}{\left\lVert u_2\right\rVert }$
+    \item \dots
+    \item $u_k = v_k - \sum_{j=1}^{k-1}proj_{u_j}(v_k) \Rightarrow e_k = \frac{u_k}{\left\lVert u_k\right\rVert }$ 
+ \end{enumerate}
+
+ We do this for all the k vectors we have and normalize them all
+ 
+\end{mainbox}
+
+\begin{mainbox}{Find eigenvectors}
+    \begin{enumerate}[leftmargin=7pt]
+        \item Solve for $det(A-\lambda I) \overset{!}{=} 0 $
+        \item Set $\lambda = \lambda_i \forall i$
+        \item Perform gauss elimination, and then get the systems of equations wrt one variable and set the variable to 1
+        \item If necessary, normalize
+    \end{enumerate}
+\end{mainbox}
+
+\begin{subbox}{Prove PSD}
+    One of the easier ways to prove a matrix is PSD, is by $x^TAx$ and usually showing it's a norm squared. Another way is Sylvesters' criterion:
+    Let $A^{(1)} = [a_{11}], A^{(n)} = A$, like $A^{(k)}$ be the $k\times k$ submatrix from topleft. Then $\Delta_k = det(A^{(k)})$    
+    \begin{itemize}
+        \item A spd $\Leftrightarrow$ $\Delta_i > 0, ..., \Delta_n > 0$
+        \item A snd $\Leftrightarrow$ $(-1)^1 \Delta_1 > 0, ..., (-1)^n \Delta_n > 0$  
+    \end{itemize}
+      This is not always conclusive!
+\end{subbox}
+\end{document}

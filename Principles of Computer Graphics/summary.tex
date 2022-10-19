@@ -20,7 +20,7 @@
 }
 
 \usepackage{algorithm2e}
-
+\usepackage{float}
 
 \usepackage{tcolorbox}
 \setcounter{section}{-1}
@@ -618,7 +618,12 @@ Squeezing a higher dimension into a lower dimension, where in graphics usually 3
 
 
 \subsection{Family of Projections}
-%TODO insert image of family of projections
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fam_of_proj.png}
+    \caption{Family of Projections}
+    \label{fig:fam_of_proj}
+\end{figure}
 \subsubsection*{Parallel vs perspective projections}
 \begin{itemize}
     \item In 3D we map points from 3-space to the projection plane (PP) along projection lines emanating from the center of projection
@@ -689,7 +694,14 @@ Properties of parallel projection:
 
 In perspective transformation, parallel lines appear to converge to a single point (easy to see if we have squares and draw parallel lines.)\newline
 \textbf{Vanishing point: } points at which parallel lines on PP  
-%TODO: there is a summary of projections in page 35
+\subsubsection*{Summary of projections}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{summ_projections.png}
+    \caption{All kinds of projections}
+    \label{fig:summ_projections}
+\end{figure}
 
 \subsubsection*{View Frustum: the visible "volume" }
 %TODO: idk what this is, have to look it up
@@ -1009,8 +1021,21 @@ Computation of $\mathbf{R}$ is expensive and time consuming, so there is the fol
 .\], where $\mathbf{H = \frac{L+V}{|L+V|}}$ 
 
 
-%TODO: include page 34 and 41
+\subsubsection*{Choosing the parameters}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ns_kd_ks_param.png}
+    \caption{Choosing parameters}
+    \label{fig:ns_kd_ks_param}
+\end{figure}
 
+\subsubsection*{Summary of Phong Illumination Model}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{phong_ill.png}
+    \caption{Summary of Phong Illumination Model}
+    \label{fig:phong_summ}
+\end{figure}
 
 \subsection{Interpolative Shading}
 Smooth surface are approximated by polygonal facets, since it gives us better photorealism. For shading, we use a term called \textbf{interpolative shading}. Since we are having polygons and triangles, we need to have the visual appeareance that's curved. 

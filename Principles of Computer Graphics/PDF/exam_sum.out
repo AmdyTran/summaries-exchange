@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section.1}{Display and Color}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Display Devices and terms}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{2D and 3D Maths}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Transformation matrixes}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Hierarchical Modeling }{}% 5
+\BOOKMARK [1][-]{section.4}{Interactive 3D control}{}% 6
+\BOOKMARK [1][-]{section.5}{Camera, Projection, Clipping}{}% 7
+\BOOKMARK [1][-]{section.6}{Clipping}{}% 8
+\BOOKMARK [2][-]{subsection.6.1}{Cohnen Sutherland}{section.6}% 9
+\BOOKMARK [2][-]{subsection.6.2}{Polygon Clipping}{section.6}% 10
+\BOOKMARK [2][-]{subsection.6.3}{Weiler-Atherton Clipping}{section.6}% 11
+\BOOKMARK [1][-]{section.7}{Rasterization}{}% 12
+\BOOKMARK [2][-]{subsection.7.1}{Triangles}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.2}{Flood Fill vs Boundary Fill}{section.7}% 14
+\BOOKMARK [2][-]{subsection.7.3}{Anti-aliasing}{section.7}% 15
+\BOOKMARK [1][-]{section.8}{ Hidden Surface Removal}{}% 16
+\BOOKMARK [1][-]{section.9}{Lighting, Material, Shading}{}% 17
+\BOOKMARK [2][-]{subsection.9.1}{Phong Illummination Model}{section.9}% 18
+\BOOKMARK [2][-]{subsection.9.2}{Interpolative shading}{section.9}% 19
+\BOOKMARK [2][-]{subsection.9.3}{Gouraud Shading}{section.9}% 20
+\BOOKMARK [2][-]{subsection.9.4}{Phong Shading}{section.9}% 21

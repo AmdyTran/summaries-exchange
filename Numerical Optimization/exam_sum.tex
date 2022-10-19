@@ -1,6 +1,6 @@
 % Basic stuff
 \documentclass[a4paper]{article}
-\usepackage[10pt]{extsizes}
+\usepackage[9pt]{extsizes}
 
 % 3 column landscape layout with fewer margins
 \usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
@@ -93,7 +93,7 @@
     A function $\left\lVert \cdot \right\rVert: \mathbb{R}^d \to \mathbb{R}$ 
     is called a norm if it satisfies \begin{enumerate}
         \item $\left\lVert x\right\rVert \geq 0 \forall \mathbf{x}\in \mathbb{R}^d$ and for $\mathbf{x}\neq \mathbf{0}$ we have $\left\lVert x\right\rVert > 0$ 
-        \item $\forall c \in \mathbb{R}, $ $|c|\left\lVert x\right\rVert $  
+        \item $\forall c \in \mathbb{R}, $$\left\lVert cx\right\rVert = |c|\left\lVert x\right\rVert $  
         \item $\forall \mathbf{x,y}\in \mathbb{R}^d, \left\lVert x+y\right\rVert \leq \left\lVert x\right\rVert + \left\lVert y\right\rVert $   
     \end{enumerate}
 \end{mainbox}
@@ -112,7 +112,10 @@ The inner product $\langle x,y \rangle = x^Ty$ is positive-definite for all $\la
 \begin{mainbox}{Mutual Orthogonal}
     A set of vectors is called \textbf{mutually orthogonal} if $\forall i \neq j : <x^{(i)}, x^{(j)}> = 0$ and a set of mutually orthogonal vectors is linearly independent.
 \end{mainbox}
-\textbf{Note:} we call a set orthonormal if $<x^{(i)}, x^{(j)}> \delta_i,j$  
+\textbf{Note:} we call a set orthonormal if $\langle x^{(i)}, x^{(j)}\rangle = \begin{cases}
+1 & \text{if i =j}\\
+0 & \text{if i } \neq \text{j}
+\end{cases}$  
 
 Matrix notation:
 $A= \left( \begin{smallmatrix} a_{1,1} & a_{1,2} & \dots & a_{1,n} \\
@@ -127,7 +130,8 @@ The product is defined as $\left[AB\right]_{i,j} = \sum_{k=1}^{n} a_{i,k}b_{k,j}
     \item Rank of matrix: dimension of subspace $\mathcal{R}(A)$
     \item $Rank(A_{m\times n}) \leq min(m,n)$ and full-rank if $Rank(A) = min(m,n)$
     \item Null space of a matrix, the subspace of all vectors which A maps to $\mathbf{0}$: $\mathcal{N}(A) := \{x: Ax =\mathbf{0}\}$
-    \item Determinant: $det(A) = \sum_{j=1}^{n} (-1)^{i+j}a_{i,j}det(A_{(i,j)})$     
+    \item Determinant: $det(A) = \sum_{j=1}^{n} (-1)^{i+j}a_{i,j}det(A_{(i,j)})$ 
+    \item Inverse of $\left[\begin{smallmatrix} a & b \\ c & d  \end{smallmatrix} \right] = \frac{1}{ad-bc}\left[\begin{smallmatrix} d& -b \\ -c & a  \end{smallmatrix} \right]$     
 \end{itemize}
 
 Equivalent sayings:
@@ -139,6 +143,16 @@ Equivalent sayings:
     \item A has a zero null space $\mathcal{N}(A) = 0$
     \item A has full range $\mathcal{R}(A) = 0$   
 \end{itemize}
+
+Some statements:
+\begin{itemize}
+    \item \textcolor{red}{Wrong:} If $x\perp y$ and $x \perp z$ then $y \perp z$    
+    \item \textcolor{red}{Wrong:} If \textbf{x,y}  are linearly independent, and \textbf{x,z}  as well, then \textbf{y,z}  are also linearly independent. 
+    \item \textcolor{blue}{Correct:} If $x\perp y$ and $x\perp z$, then $x \perp (y+z)$ 
+    \item \textcolor{red}{Wrong:} If $\textbf{x,y,}$ are linearly independent and $\textbf{x,z}$ as well, then $x, (y+z)$ are also linearly independent.
+\end{itemize}
+
+
 
 \begin{subbox}{Eigenvectors and Eigenvalues}
     For a vector $\mathbf{v} \neq \mathbf{0}$, it's an eigenvector for its eigenvalue $\lambda$ such that: $Av = \lambda v$    
@@ -169,11 +183,7 @@ A is psd $\Leftrightarrow $ all its eigenvalues are non-negative $\Leftrightarro
     
 \end{subbox}
 
-
-
-
 \section{(Multivariable) Calculus Recap}
-\section*{Lecture 5}
 \begin{subbox}{Special sets}
     Epigraph:
 $
@@ -203,7 +213,6 @@ A function is linear if $\forall x,y\in\mathbb{R}^n, c\in \mathbb{R} f(cx + y) =
     .\] 
 \end{subbox}
 
-Common gradients and hessians:
 \begin{mainbox}{Gradient and Hessians}
     A function $f: \mathbb{R}^n \to \mathbb{R}$ has a gradient defined as $\nabla f(x) = \left[\frac{\delta f(x)}{\delta x_1}, \dots, \frac{\delta f(x)}{\delta x_n}\right]^T$ and hessian is the second derivative (square matrix.)   
 \end{mainbox}
@@ -220,18 +229,19 @@ Common gradients and hessians:
     \item Chain rule: $d(g\circ f)(x) = dg(f(x)) \cdot df(x)$ 
     \item Product rule: $g(x)h(x) = dg(x)h(x) + g(x)dh(x)$ 
     \item $f(x)= \left\lVert Ax-b\right\rVert ^2, \nabla f(x) = 2A^T(Ax-b), Hess_f(x) = 2A^TA$
-    \item $f(x) = \left\lVert Ax-b\right\rVert, \frac{A^T(Ax-b)}{\left\lVert Ax-b\right\rVert}, Hess_f(x)= \frac{A^TA}{\left\lVert Ax-b\right\rVert }  - \frac{(A^TAx-b)((x^TA^T-b^T)A)}{\left\lVert Ax-b\right\rVert^3 }$  
-    \item $d\mathbf{0} = 0, d(\alpha \mathbf{X}) = \alpha d\mathbf{X}, d(\mathbf{X^{-1}}) = -\mathbf{X^{-1}}(\mathbf{dX})X^{-1}, d\mathbf{X}^T = (d\mathbf{X})^T, \frac{dx^Ta}{dx} = \frac{da^Tx}{dx} a, \frac{dx^TAx}{dx} (A+A^T)x, \frac{d}{ds}(x-As)^TW(x-As) = -2A^TW(x-As), \frac{d}{dx}(x-As)^TW(x-As) = 2W(x-As)$    
+    \item $f(x) = \left\lVert Ax-b\right\rVert, \nabla f(x) = \frac{A^T(Ax-b)}{\left\lVert Ax-b\right\rVert}, \\ Hess_f(x)= \frac{A^TA}{\left\lVert Ax-b\right\rVert }  - \frac{(A^TAx-b)((x^TA^T-b^T)A)}{\left\lVert Ax-b\right\rVert^3 }$  
+    \item $d\mathbf{0} = 0, d(\alpha \mathbf{X}) = \alpha d\mathbf{X}, d(\mathbf{X^{-1}}) = -\mathbf{X^{-1}}(\mathbf{dX})X^{-1},$\\
+     $d\mathbf{X}^T = (d\mathbf{X})^T, \frac{dx^Ta}{dx} = \frac{da^Tx}{dx} =a, \frac{dx^TAx}{dx} (A+A^T)x, \\
+     \frac{d}{ds}(x-As)^TW(x-As) = -2A^TW(x-As), \\ \frac{d}{dx}(x-As)^TW(x-As) = 2W(x-As)$    
 \end{itemize}
 
 
 
 We can approximate functions using gradients and hessians:
-$
-f(x) \approx f(\mathbf{x_0}) + \nabla f(\mathbf{x_0})^T (\mathbf{x-x_0}) +
-\newline
- \frac{1}{2}(\mathbf{x-x_0})^T H_f(\mathbf{x_0})(\mathbf{x-x_0})
-$
+\textbf{First order Taylor:} 
+$f(x) = f(\mathbf{x_0}) + \nabla f(\mathbf{x_0})^T (\mathbf{x-x_0}) + \epsilon(x)$ it holds that $lim_{x \to x_0}\frac{\epsilon(x)}{\left\lVert x-x_0\right\rVert } = 0$ 
+\textbf{Second order Taylor:} 
+$f(x) = f(\mathbf{x_0}) + \nabla f(\mathbf{x_0})^T (\mathbf{x-x_0}) + \frac{1}{2}(\mathbf{x-x_0})^T H_f(\mathbf{x_0})(\mathbf{x-x_0}) + \epsilon_2(x)$ it holds that $lim_{x \to x_0}\frac{\epsilon(x)_2}{\left\lVert x-x_0\right\rVert^2 } = 0$ 
 
 \begin{mainbox}{Affine Functions}
     Let $f\in\mathbb{R}^d \to \mathbb{R}$ be a multivariable function. Then f is an affine function iff:
@@ -277,7 +287,7 @@ Let the optimization problem be formulated as $\underset{x\in\mathbb{R}^d}{min}f
 \begin{itemize}
     \item NP-Hard problems: \textit{proven}  to be intractable
     \item  Linear Programming Problems: if a problem can be rewritten as $\underset{x\in\mathbb{R}^d}{min} \textbf{c} ^T\textbf{x} $ subject to $A\textbf{x}  \leq \textbf{b} $ and $\textbf{x} \geq\textbf{0} $, with $f$ and $g_i \forall i$ affine.   If f is non-Affine, then it's a non linear programming task
-    \item Convex optimization problem: if $f, g_i$ are all convex and we can rewrite it as $\underset{x\in\mathbb{R}^d}{\min}f(x) $ subject to $g_(x) \leq 0$ for all $i$ or $Ax=b$, else non-convex  
+    \item Convex optimization problem: if $f, g_i$ are all convex and we can rewrite it as $\underset{x\in\mathbb{R}^d}{\min}f(x) $ subject to $g_(x) \leq 0$ for all $i$ or $Ax=b$, else non-convex. Also if we have a constraint with equality, it must be affine.
 \end{itemize}
 
 \begin{mainbox}{How to}
@@ -296,14 +306,27 @@ Examples:
 \end{itemize}
 
 \textbf{Definition:} two problems are called \textit{equivalent} if their optimal solutions are in one-to-one correspondence.  
-
-Feasible set:
-$S=\{x\in\mathbb{R}^d: g_i(x) \leq \text{ for all } 1\leq i \leq m\}$ and $x^*$ is called the globally optimal solution if it minimized the object function. We also have a locally optimal solution. In convex problems they are the same.
-
-
-
+\begin{itemize}
+    \item Two problems are \textbf{equivalent} if their optimal solutions are in one-to-one correspondence
+    \item For above, sometimes a non-convex task we can find an equivalent convex task.
+    \item \textbf{ Feasible set: } $S=\{x\in\mathbb{R}^d: g_i(x) \leq \text{ for all } 1\leq i \leq m\}$ (the set satisfying the constraint functions)
+    \item Locally optimal solution $(x^*)$ : $S \cap \{x:\left\lVert x-x^*\right\rVert \leq \epsilon \} $ for some $\epsilon > 0$ (usually easy to compute)
+    \item Globally optimal solution $(x^*)$ : $x^*\in S: \forall x \in S: f(x^*)\leq f(x)$
+    \item In convex optimization problems, every local optimum is also a global optimum. \textbf{Proof by contradiction:} assume $x_0$ is locally optimal, and $x^*$ globally optimal. We know $\theta x_0 + (1-\theta)x^* \in S$, thus $f(\theta x_0 + (1-\theta)x^*) \leq \theta f(x_0) + (1-\theta)f(x^*) < \theta f(x^*) + (1-\theta)f(x^*) = f(x^*)$, which means $x^*$ isn't the global optimum.      
+    \item The feasible set, is also a convex set     
+\end{itemize}
+ 
 \section{Extra}
+\begin{subbox}{Prove PSD (Sylvesters Criterion)}
+    One way to show PSD, is by $x^TAx$ and usually showing it's a norm squared.
+    Let $A^{(k)}$ be the $k\times k$ submatrix from topleft, let $A^{(1)} = [a_{11}], A^{(n)} = A$, and $\Delta_k = det(A^{(k)})$. (NOT ALWAYS CONCLUSIVE METHOD)  
+    \begin{itemize}
+        \item A spd $\Leftrightarrow$ $\Delta_i > 0, ..., \Delta_n > 0$
+        \item A snd $\Leftrightarrow$ $(-1)^1 \Delta_1 > 0, ..., (-1)^n \Delta_n > 0$  
+    \end{itemize}
+\end{subbox}
 \begin{mainbox}{Gram-Schmidt: orthogonalize a basis}
+    Given some vectors for a basis of a subspace $S\subseteq \mathbb{R}^n$, to get an orthogonal basis we can use the following on all vectors. 
  \begin{enumerate}
     \item Let $proj_u(v) = \frac{\langle u, v \rangle}{\langle u, u\rangle}u$ 
     \item $u_1 = v_1 \Rightarrow e_1 = \frac{u_1}{\left\lVert u_1\right\rVert } $
@@ -311,27 +334,27 @@ $S=\{x\in\mathbb{R}^d: g_i(x) \leq \text{ for all } 1\leq i \leq m\}$ and $x^*$ 
     \item \dots
     \item $u_k = v_k - \sum_{j=1}^{k-1}proj_{u_j}(v_k) \Rightarrow e_k = \frac{u_k}{\left\lVert u_k\right\rVert }$ 
  \end{enumerate}
-
- We do this for all the k vectors we have and normalize them all
  
 \end{mainbox}
 
 \begin{mainbox}{Find eigenvectors}
     \begin{enumerate}[leftmargin=7pt]
-        \item Solve for $det(A-\lambda I) \overset{!}{=} 0 $
-        \item Set $\lambda = \lambda_i \forall i$
+        \item Solve for $\lambda$ in $det(A-\lambda I) \overset{!}{=} 0 $ (these are eigenvalues)
+        \item To get all eigenvectors, set $\lambda = \lambda_i$ in $(A-\lambda I)\mathbf{x} \overset{!}{=} \mathbf{0} $ for all eigenvalues we got.
         \item Perform gauss elimination, and then get the systems of equations wrt one variable and set the variable to 1
-        \item If necessary, normalize
+        \item If necessary, normalize (for ex. spectral dec.) 
     \end{enumerate}
+    Example:
+    $\left[\begin{smallmatrix} 2 & 1 & 0 \\ 1 & 2 & 1 \\ 0 & 1 & 2 \end{smallmatrix}\right] $ has eigenvectors $\lambda_1  = 2, \lambda_2  =2- \sqrt{2}, \lambda_3  = 2 + \sqrt{2}$. Plugging in $\lambda_1$ gives $\left[\begin{smallmatrix} 0 & 1 & 0\\ 1 & 0 & 1\\ 0 & 1 & 0 \end{smallmatrix}\right]\left[\begin{smallmatrix} x \\ y\\ z \end{smallmatrix} \right]\Rightarrow y = 0, x = -z, y =0$ thus the eigenvector $[1, 0, -1]^T$   
 \end{mainbox}
 
-\begin{subbox}{Prove PSD}
-    One of the easier ways to prove a matrix is PSD, is by $x^TAx$ and usually showing it's a norm squared. Another way is Sylvesters' criterion:
-    Let $A^{(1)} = [a_{11}], A^{(n)} = A$, like $A^{(k)}$ be the $k\times k$ submatrix from topleft. Then $\Delta_k = det(A^{(k)})$    
-    \begin{itemize}
-        \item A spd $\Leftrightarrow$ $\Delta_i > 0, ..., \Delta_n > 0$
-        \item A snd $\Leftrightarrow$ $(-1)^1 \Delta_1 > 0, ..., (-1)^n \Delta_n > 0$  
-    \end{itemize}
-      This is not always conclusive!
-\end{subbox}
+Suppose $A,B \in \mathbb{R}^{n\times n}$ are symmetric PSD matrices:
+\begin{itemize}
+    \item \textcolor{blue}{also PSD:} $A+B$, $A+ I_n$, $A^{-1}$
+    \item \textcolor{red}{not PSD:} $AB$ (only when the product is symmetric)    
+\end{itemize}
+
+\noindent Extra:
+For a unit vector $\textbf{v} (\left\lVert\textbf{ v } \right\rVert= 1), \epsilon > 0$ it holds that $f(x_0 + \epsilon v) \approx f(x_0) + \epsilon \nabla f(x_0)^T\textbf{v} $. We have a \textit{maximal rate of local variation} along the gradient. In contrast, \textit{zero rate of variation} along any direction orthogonal to the gradient. Gradient are orthogonal to contour sets  
+
 \end{document}

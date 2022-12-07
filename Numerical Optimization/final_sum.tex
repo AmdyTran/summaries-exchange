@@ -1,0 +1,356 @@
+% Basic stuff
+\documentclass[a4paper]{article}
+
+\usepackage{algorithm2e}\SetAlgoSkip{}
+\usepackage[8pt]{extsizes}
+
+% 3 column landscape layout with fewer margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+\Ncolumn[<9]{3}
+\onecolumn[9]
+
+% define nice looking boxes
+\usepackage[many]{tcolorbox}
+
+% a base set, that is then customised
+\tcbset {
+	base/.style={
+		boxrule=0mm,
+		leftrule=1mm,
+		left=1.75mm,
+		arc=0mm, 
+		fonttitle=\bfseries, 
+		colbacktitle=black!10!white, 
+		coltitle=black, 
+		toptitle=0mm, 
+		bottomtitle=0mm,
+        bottom=0mm,
+        top=0mm,
+		title={#1}
+	}
+}
+
+\definecolor{brandblue}{rgb}{0.34, 0.7, 1}
+\newtcolorbox{mainbox}[1]{
+	colframe=brandblue, 
+	base={#1}
+}
+
+\newtcolorbox{subbox}[1]{
+	colframe=black!20!white,
+	base={#1}
+}
+
+% Mathematical typesetting & symbols
+\usepackage{amsthm, mathtools, amssymb} 
+\usepackage{marvosym, wasysym}
+\allowdisplaybreaks
+
+% Tables
+\usepackage{tabularx, multirow}
+\usepackage{makecell}
+\usepackage{booktabs}
+\renewcommand*{\arraystretch}{2}
+
+% Make enumerations more compact
+\usepackage{enumitem}
+\setitemize{itemsep=0pt}
+\setenumerate{itemsep=0pt}
+
+% To include sketches & PDFs
+\usepackage{graphicx}
+
+% For hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true
+}
+
+\usepackage{titlesec}
+\titlespacing*{\section}
+{0pt}{0ex}{1ex}
+\titlespacing*{\subsection}
+{0pt}{0ex}{1ex}
+
+
+% section smaller
+\usepackage{sectsty}
+\sectionfont{\large}
+\subsectionfont{\small}
+
+
+
+\begin{document}
+\section{Lecture 8}
+\begin{subbox}{First order necessary condition}
+    For a continuously differentiable function $f:\mathbb{R}^d \to \mathbb{R}$, $\nabla f(x^*) = 0$ holds for the optimal solution $x^*$
+\end{subbox}
+
+Above is both necessary and sufficient for local and global optimality of $x^*$, if f is convex.
+
+\begin{subbox}{Second-Order necessary condition}
+    For a twice continuously differentiable function $f:\mathbb{R}^d \to \mathbb{R}$ in an optimization problem, the locally optimal solution $x^*$ will satisfy $\nabla f(x^*) = \textbf{0}$ and $H_f(x^*) \succeq 0$    
+\end{subbox}
+When strictness applies for the second condition, we have a locally optimal solution (sufficient).
+
+\begin{mainbox}{Lagrangian}
+    Let the Lagrangian be defined as follows: 
+    \[
+    \ell(x, \lambda, \mu) := f(x) + \sum_{i=1}^{m} \lambda_i g_i(x) + \sum_{j=1}^{p} \mu_j h_j (x)
+    .\] where $g_i(x) \leq 0$ and $h_j(x) = 0$   
+\end{mainbox}
+
+\begin{subbox}{Primal Objective wrt. Lagrangian}
+    $\underset{x\in \mathbb{R}^d}{\min}\underset{\lambda \geq 0, \mu}{\max} \ell(x, \lambda, \mu)$
+\end{subbox}
+$\underset{\lambda \geq 0, \mu}{\max} \ell(x, \lambda, \mu) = \begin{cases}
+    f(x) & \text{if } x \text{ is feasible}\\
+    +\infty & \text{otherwise} 
+\end{cases}  $. \\
+For the dual problem we have the following:
+$\underset{\lambda \geq 0, \mu}{\max}\underset{x\in \mathbb{R}^d}{\min} \ell(x, \lambda, \mu)$
+
+\begin{mainbox}{KKT- Necessary conditions}
+    Let $f, g_i, h_i$ all be continuously differentiable function. Then for an optimal solution $x^*$, following is satisfied
+    \begin{itemize}
+        \item Primal Feas.: $\forall i,j: $ $g_i(x) \leq 0$ and $h_j(x) = 0$
+        \item Dual Feasibility: $\forall i:$ $\lambda_i \geq 0$
+        \item Compl. Slackness: $\forall i: $ $\lambda_i g_i(x) = 0$
+        \item Stationarity:\\ $\nabla f(x) + \sum_{i=1}^{m} \lambda_i \nabla g_i(x) + \sum_{j=1}^{p} \mu_j \nabla h_j(x) =0$
+    \end{itemize}
+      
+\end{mainbox}
+
+\begin{subbox}{Minimax and maximum inequality}
+    It always holds that:
+    $\underset{x\in \mathcal{X}}{\min} \underset{y\in \mathcal{Y}}{\max} f(x,y) \geq \underset{y\in \mathcal{Y}}{\max} \underset{x\in \mathcal{X}}{\min}f(x,y) 
+    .$
+\end{subbox}
+We call this weak duality as well for optimization problems. \textbf{Strong duality} if it holds with equality.
+
+\section{Lecture 9}
+Strong duality holds for a convex optimization problem, if there exists a strictly feasible $x\in \mathbb{R}^d: $ $h_j(x) = 0, g_i(x) < 0 \; \forall i,j$. This is called the Slater's condition, the weak slater's condition is with equality as well for the last constraint. If the problem is convex, and all functions affine, then strong duality also holds.
+
+\begin{subbox}{}
+    If we have a convex problem, KKT conditions are sufficient and always imply $x^*$ is a globally optimal solution. 
+\end{subbox}
+
+\textbf{Dual function}:  $g(\lambda, \mu) = \underset{x\in \mathbb{R}^d}{\min}\ell(x,\lambda,\mu)$ , which is ALWAYS concave. If we take the maximum over $\lambda,\mu$ we have a convex problem. 
+\section{Lecture 10}
+\begin{mainbox}{Line Search and Descent methods}
+    Line search is an interative algorithm with the following update for a computed search direction $p_k$ and stepsize $a_k > 0$ such that:
+    $x^{(k+1)} = x^{(k)} + a_k p_k$. For a descent method following holds: $f(x^{(k+1)}) < f(x^{(k)}) $    
+\end{mainbox}
+For a convex continuously-differentiable function, $p_k$ is a descent direction if $p_k^T\nabla f(x^{(k)}) < 0$  
+
+Useful characterization of $p_k$ is through a PSD matrix: $p_k = -B_k \nabla f(x^{(k)})$
+
+\begin{itemize}
+    \item Gradient Descent: $B_k = I_d$
+    \item Newton's method: $B_k = H_f^{-1}(x^{(k)})$ 
+    \item Quasi-Newton's methods: $B_k \approx H_f^{-1}(x^{(k)})$
+\end{itemize}
+
+Two methods to find stepsize $a_k$:
+\begin{itemize}
+    \item Exact line search: $a_k = \underset{a>0}{argmin} f(x^{(k)} + \alpha p_k)$
+    \item Backtracking line search: start from initial $s_k > 0$, repeat $s_k \leftarrow \beta s_k$ until following is achieved $f(\textbf{x} + s\textbf{d}) < f(\textbf{x}) + \alpha s \nabla f(\textbf{x})^T\textbf{d}$, for some chosen $\alpha \in ]0,1[$ and $\beta \in ]0,1[$. Then $s_k$ is our chosen step size    
+\end{itemize}
+
+\begin{subbox}{Gradient descent for quadratic functions}
+    For quadratic objectives: $f(x) = \frac{1}{2}x^TAx + b^Tx + c $ for spd A with ev $ 0 < \lambda_1 \leq ... \leq \lambda_d$ it holds that $\left\lVert x^{(k+1)} - x^*\right\rVert \leq \frac{\lambda_d - \lambda_1}{\lambda_d + \lambda_1}\left\lVert x^{(k)} - x^*\right\rVert $    
+    We have linear convergence, namely: $\frac{\left\lVert x^{(k+1)} - x^*\right\rVert }{\left\lVert x^{(k)} - x^*\right\rVert } \leq M$ for some $M < 1$.  Define $\kappa = \frac{\lambda_d}{\lambda_1}$ 
+\end{subbox}
+
+\begin{subbox}{Gradient descent for convex functions}
+    For convex functions, we have the same, with the Hessian satisfying $\mu I_d \preceq H_f(x) \preceq \lambda I_d$, then we have: \\
+    $\left\lVert x^{(k+1)} - x^*\right\rVert \leq (\frac{\lambda-\mu}{\lambda + \mu}) \left\lVert x^{(k)} - x^*\right\rVert $. Define $\kappa = \frac{\lambda}{\mu}$ 
+\end{subbox}
+If $\kappa \approx 1$, then we converge with satisfactory speed, if $ \kappa >> 1$, then very slowly.  
+
+\section{Lecture 11}
+For the Newton's method, we need the Taylor Approximation:
+\[
+f(x) \approx f(x_0) + \nabla f(x_0)^T (x-x_0) + \frac{1}{2}(x-x_0)^T H_f(x_0)(x-x_0)
+.\]
+so we can just optimize over this function, where $x_0 = x^{(k)}$ over each iteration.
+
+\begin{subbox}{Affine invariant of Newton's method}
+    We get the following sequence of updates when trying to minimize f(x) 
+    \[
+    x^{(0)}, x^{(1)}, x^{(2)}, ...
+    .\] then for invertible $A \in \mathbb{R}^{d\times d}$, $f(Ax)$ and initialized at $y^{(0)} = A^{-1}x^{(0)}$ we get the following sequence of updates: \[
+        A^{-1}x^{(0)}, A^{-1}x^{(1)}, A^{-1}x^{(2)}, ...
+    .\]   
+\end{subbox}
+
+\begin{subbox}{Quad. convergence of Newton's method}
+    Suppose f is twice differentiable and the Hessian is Lipschitz-continuous with constant L:
+    $\forall x, x': \left\lVert H_f(x) - H_f(x')\right\rVert \leq L\left\lVert x-x'\right\rVert $ 
+    then for Newton's method that is sufficiently close to the local optimum $x^*$:
+    $\left\lVert x^{(k+1)} - x^*\right\rVert \leq \left\lVert \frac{L}{\lambda_{min}(H_f(x^*))}
+    \right\rVert \left\lVert x^{(k)} - x^*\right\rVert^2 $  
+    
+\end{subbox}
+
+\begin{subbox}{Definition of operator norm}
+    Given a matrix $A\in \mathbb{R}^{n \times d}$ and $\ell_p - norm$, the operator norm for matrices is defined as follows: 
+    \[
+    \left\lVert A\right\rVert_p = \underset{x\in \mathbb{R}^d: \left\lVert x\right\rVert_p \leq 1}{\max}\left\lVert Ax\right\rVert_p
+    .\] 
+\end{subbox}
+\begin{itemize}
+    \item $\left\lVert Ax\right\rVert_p \leq \left\lVert A\right\rVert_p \left\lVert x\right\rVert_p$ always holds
+    \item $\left\lVert BA\right\rVert_p \leq \left\lVert B\right\rVert_p \left\lVert A\right\rVert_p$ holds for every matrix 
+    \item $\left\lVert A\right\rVert_2 = \underset{1 \leq i \leq d}{\max} |\lambda_i(A)|$, for symmetric matrix $A$  
+\end{itemize}
+\section{Lecture 12}
+\begin{subbox}{Trust region methods}
+    Given an unconstrained optimization problem, trust region methods aim to solve the following:
+    \[
+    x^{(k+1)} = \underset{x\in S_k}{argmin \;} m_k(x)
+    .\] where $S_k$ is the trust region at iteration k.  
+\end{subbox}
+\begin{enumerate}
+    \item Standard (quadratic function):\\
+    $m_k(x^{(k)} + v) = f_k + g_k^Tv + \frac{1}{2}v^T B_k v$ and trust region $S_k = \{x\in \mathbb{R}^d : \left\lVert x-x^{(k)}\right\rVert \leq \epsilon \}$
+    \item Affine-based: $m_k(x^{(k)} + v) = f(x^{(k)}) + \nabla f(x^{(k)})^T v$ with the trust region $S_k = \{x^{(k)} + v: \left\lVert v\right\rVert \leq \epsilon \}$ 
+    \item Quadratic-based: $m_k(x^{(k)} + v) = f(x^{(k)}) + \nabla f(x^{(k)})^T v + \frac{1}{2}v^T H_f(x^{(k)})v$ with the trust region $S_k = \{x^{(k)} + v: \left\lVert v\right\rVert \leq \epsilon \}$
+\end{enumerate}
+(\textbf{2}) implies that $x^{(k+1)} = \underset{v\in \mathbb{R}^d: \left\lVert v\right\rVert \leq \epsilon}{argmin}
+\nabla f(x^{(k)})^Tv$\\ 
+\textbf{(3)}  implies that $x^{(k+1)} = \underset{v\in \mathbb{R}^d: \left\lVert v\right\rVert \leq \epsilon}{argmin} \nabla f(x^{(k)})^T v + \frac{1}{2}v^T H_f(x^{(k)})v $. 
+
+\begin{mainbox}{Theorem for quadratic trust region subproblems}
+    Given euclidean norm, feasible point $v_k^*$ which is optimal if and only if for some $\lambda_k \geq 0:$
+    \begin{itemize}
+        \item $H_f(x^{(k)}) + \lambda_k I_d \succeq \textbf{0} $
+        \item $\lambda_k(\left\lVert v_k^*\right\rVert - \epsilon) = 0$
+        \item $(H_f(x^{(k)}) + \lambda_k I_d)v_k^* = -\nabla f(x^{(k)})$  
+    \end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Newton's method for indefinite Hessians}
+    \begin{itemize}
+    \item Add a matrix such that $B_k = H_f(x^{(k)}) + E_k$ is sufficiently positive semi-definite: $B_k \succeq \theta I_d$ 
+    \item Eigenvalue modification: replace all the Hessians ev, less than a threshtold $\tau > 0$ with $\tau$. Alternatively we can get the spectral decomposition and modify the diagonal
+    \item Adding a multiple of the identity: $B_k = H_f(x^{(k)}) + \lambda I_d$, where $\lambda = \max\{0, \theta-\lambda_{min}(H_f(x^{(k)}))\}$  
+    \end{itemize}
+\end{mainbox}
+\section{Lecture 13}\vspace{-0.5cm}
+\begin{align*}
+    \underset{x\in \mathbb{R}^d}{\min} f(x)\\
+    \text{subject to } Ax = b
+\end{align*}
+\begin{subbox}{Local optimality}
+For the problem above, every optimal solution will satisfy the following for some vector $\mu\in \mathbb{R}^p$: \[
+\nabla f(x^*) + A^T \mu = 0, Ax^* = b
+.\]  
+\end{subbox} 
+It's necessary in general case, sufficient as well if f is convex.
+
+\begin{mainbox}{Equivalent formulation}
+    The equality constraint $Ax=b$ can be turned into $x = Fz + x_0$, where $\{x\in \mathbb{R}^d: Ax= b \} = {Fz + x_0: z\in \mathbb{R}^p}$, where $x_0$ is one feasibly point $Ax_0 = b$ and $F\in\mathbb{R}^{d\times p}$ is a matrix whose range is equal to the null space of $A\in\mathbb{R}^{p\times d}$. We can then optimize over z on $f(Fz + x_0)$ and get rid of the equality constraints.        
+\end{mainbox}
+
+Another option is using the KKT conditions, and solving following for $p_k$ in the following matrix:
+$\left[\begin{smallmatrix} H_f(x^{(k)}) & A^T \\ A & 0 \end{smallmatrix}\right] \left[\begin{smallmatrix} p_k \\ \mu_k \end{smallmatrix}\right] = \left[\begin{smallmatrix} -\nabla f(x^{(k)}) \\ Ax^{(k)} - b \end{smallmatrix}\right]  $. This can be derived from the optimality conditions, then our update is $x^{(k+1)} = x^{(k)} - a_k p_k$ for some $a_k$ 
+\begin{align}\vspace{-0.5cm}
+    \underset{x\in \mathbb{R}^d}{\min} f(x) - \theta \sum_{i=1}^{m} log(-g_-(x))\\
+    g_i(x) \leq 0 \; \forall i \in 
+    {1, ..., m}\\
+    Ax = b
+\end{align} 
+\begin{subbox}{Equivalent formulation using indicator function}
+    $\underset{x\in \mathbb{R}^d}{\min} f(x) - \eta \sum_{i=1}^{m} log(-g_i(x))\\
+    Ax = b$, gives us an equivalent problem for $\eta >0$ which is also convex, given the original problem is convex 
+\end{subbox}
+Let $\phi(x) = - \sum_{i=1}^{m} log(-g_i(x))$, then we have:\\
+ $\nabla \phi(x) = \sum_{i=1}^{m} -\frac{1}{g_i(x)} \nabla g_i(x)$ and \\
+ $H_\phi(x) = \sum_{i=1}^{m} \left[ \frac{1}{g_i^2(x)}\nabla g_i(x) \nabla g_i(x)^T - \frac{1}{g_i(x)}H_{g_i}(x)\right]$   
+
+
+\begin{mainbox}{Proposition (Interior Methods)}
+    Every locally optimal solution $x^* \in \mathbb{R}^d$ of the interior point method's optimization problem with coefficient $\eta > 0$ satisfies the following conditions for vector $\lambda \in \mathbb{R}^m$ defined as $\lambda_i = \frac{-\eta}{g_i(x^*)}$ for every $1 \leq i \leq m$ and a vector $\mu \in \mathbb{R}^p$
+    \begin{itemize}
+    \item P. Feasibility: $g_i(x^*) \leq \forall i$ and $Ax^* = b$
+    \item D. feasibility: \textbf{$\lambda$} $\geq 0$
+    \item Approximate comp. sla.: $\lambda_ig_i(x^*) = -\eta$ $\forall i$
+    \item Stationarity: $\nabla f(\textbf{x}^*) + \sum_{i=1}^{m} \lambda_i \nabla g_i(\textbf{x}^*) + A^T $\textbf{$\mu$}$ = 0$     
+    \end{itemize}      
+    
+    Only difference in approximate complementary Slackness
+    
+\end{mainbox}  
+
+\begin{mainbox}{Project Gradient Descent for constr. optimization}
+    Consider an optimization problem with the feasible set S. Then the projection operator $\Pi_S : \mathbb{R}^d$ finds the closest point in set S to some input $x \in \mathbb{R}^d$: $\Pi_s(x) = \underset{y\in S}{argmin } \left\lVert y - x\right\rVert $. Then projected gradietn descent is an iter. optimization method applying this projection to the optimization variable after every standard update of gradient descent.   
+\end{mainbox}
+
+\section{EXTRA}
+\textbf{Math Rules:} 
+\begin{itemize}
+    \item Deriv. of $f:\mathbb{R}^n \to \mathbb{R}^m$ :
+    $ df(x) = \left[\begin{smallmatrix} 
+        \frac{df_1}{dx_1} & ... & \frac{df_1}{dx_n}\\
+        \frac{df_2}{dx_1} & ... & \frac{df_2}{dx_n}\\
+        ... & ... & ... \\
+        \frac{df_m}{dx_1} & ... & \frac{df_m}{dx_n}
+    \end{smallmatrix}\right] \in \mathbb{R}^{m\times n}$ 
+    \item Gradient: we can calculate gradient for $f: \mathbb{R}^n \to \mathbb{R}$. It's defined as $\nabla f(x) = df(x)^T$ 
+    \item Chain rule: $d(g\circ f)(x) = dg(f(x)) \cdot df(x)$ 
+    \item Product rule: $g(x)h(x) = dg(x)h(x) + g(x)dh(x)$ 
+    \item $f(x)= \left\lVert Ax-b\right\rVert ^2, \nabla f(x) = 2A^T(Ax-b), Hess_f(x) = 2A^TA$
+    \item $f(x) = \left\lVert Ax-b\right\rVert, \nabla f(x) = \frac{A^T(Ax-b)}{\left\lVert Ax-b\right\rVert}, \\ Hess_f(x)= \frac{A^TA}{\left\lVert Ax-b\right\rVert }  - \frac{A^T(Ax-b)((x^TA^T-b^T)A)}{\left\lVert Ax-b\right\rVert^3 }$  
+    \item $d\mathbf{0} = 0, d(\alpha \mathbf{X}) = \alpha d\mathbf{X}, d(\mathbf{X^{-1}}) = -\mathbf{X^{-1}}(\mathbf{dX})X^{-1},$\\
+     $d\mathbf{X}^T = (d\mathbf{X})^T, \frac{dx^Ta}{dx} = \frac{da^Tx}{dx} =a, \frac{dx^TAx}{dx}= (A+A^T)x, \\
+     \frac{d}{ds}(x-As)^TW(x-As) = -2A^TW(x-As), \\ \frac{d}{dx}(x-As)^TW(x-As) = 2W(x-As)$ 
+     \textbf{Care:} some above are given as gradients, verify before.    
+\end{itemize}
+
+\subsection{Convexity}
+\begin{itemize}
+    \item f is convex if $\forall x,y$ and $\theta \in [0,1]$: $f(\theta x + (1-\theta)y ) \leq \theta f(x) + (1-\theta)f(y)$ holds 
+    \item A differentiable function f is convex iff its domain is convex and $\forall x,y\in dom(f): f(y) \geq f(x) + \nabla f(x)^T (y-x)$ 
+    \item Same as above, but this $\forall \mathbf{x}\in dom(f) : H_f(\mathbf{x}) \succeq 0$ (so PSD)  
+
+\end{itemize}
+  
+
+\textbf{Dual Norm:}
+Dual norm is defined as $\left\lVert x\right\rVert_* = \underset{y: \left\lVert y\right\rVert \leq 1}{max}y^Tx $ 
+Dual norm rules:
+\begin{itemize}
+    \item Standard norm rules: positive definiteness, scalar product, triangle inequality
+    \item Dual norm to Euclidean norm itself, by choosing $y= \frac{x}{\left\lVert x\right\rVert }$ 
+    \item Dual norm to $\ell_\infty$ is $\ell_1$, by choosing $y= sgn(x)$
+    \item Dual norm to $\ell_1$ is $\ell_\infty$, by choosing $y_i = 1$ where $max(x) = x_i$
+    \item Dual norm to $\ell_p $ is $\ell_q$, with $\frac{1}{p} + \frac{1}{q} = 1$           
+\end{itemize}
+\begin{algorithm}
+    \caption{Line search methods}
+    Pick an initial point $x^{(0)}$\\
+    \For{k=0 to T}{
+        Find a descent direction $p_k$\\
+        Perform line search or backtracking to find step-size $a_k >0$\\
+        $x^{(k+1)} \gets x^{(k)} + a_k \textbf{p}_k$ 
+    }
+\end{algorithm}
+
+\begin{algorithm}
+    Pick an initial point $x^{(0)}$ \\
+    \For{k = 0 to T}{
+        Compute a model function $m_k$ locally designed around $x^{(k)}$\\
+        Assign a trust region $S_k$ around $x^{(k)}$\\
+        Update $x^{(k=1)} = \underset{x\in S_k}{argmin} m_k(x)$  
+    }
+    \caption{Trust region methods}
+\end{algorithm}
+
+\textbf{Projected Gradient Descent:} 
+\newline
+Same as normal gradient descent, but in the last step project $x^{(k)}$ onto the feasible set. 
+\end{document}

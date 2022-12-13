@@ -1,0 +1,340 @@
+% Basic stuff
+\documentclass[a4paper]{article}
+\usepackage[8pt]{extsizes}
+
+% 3 column landscape layout with fewer margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{0.01cm}
+\Ncolumn[<9]{3}
+\onecolumn[9]
+
+
+% define nice looking boxes
+\usepackage[many]{tcolorbox}
+
+% section smaller
+\usepackage{sectsty}
+\sectionfont{\large}
+\subsectionfont{\small}
+% a base set, that is then customised
+\tcbset {
+	base/.style={
+		boxrule=0mm,
+		leftrule=1mm,
+		left=1.75mm,
+		arc=0mm, 
+		fonttitle=\bfseries, 
+		colbacktitle=black!10!white, 
+		coltitle=black, 
+		toptitle=0.75mm, 
+		bottomtitle=0.25mm,
+		title={#1}
+	}
+}
+
+\definecolor{brandblue}{rgb}{0.34, 0.7, 1}
+\newtcolorbox{mainbox}[1]{
+	colframe=brandblue, 
+	base={#1}
+}
+
+\newtcolorbox{subbox}[1]{
+	colframe=black!20!white,
+	base={#1}
+}
+
+\usepackage{titlesec}
+\titlespacing*{\section}
+{0pt}{0ex}{1ex}
+\titlespacing*{\subsection}
+{0pt}{0ex}{1ex}
+
+% Mathematical typesetting & symbols
+\usepackage{amsthm, mathtools, amssymb} 
+\usepackage{marvosym, wasysym}
+\allowdisplaybreaks
+
+% Tables
+\usepackage{tabularx, multirow}
+\usepackage{makecell}
+\usepackage{booktabs}
+\renewcommand*{\arraystretch}{2}
+
+% Make enumerations more compact
+\usepackage{enumitem}
+\setitemize{itemsep=0pt}
+\setenumerate{itemsep=0pt}
+
+% To include sketches & PDFs
+\usepackage{graphicx}
+\graphicspath{{./summ_img/}}
+
+% For hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true
+}
+
+
+
+\begin{document}
+\section{10: Texture}
+\subsection*{Texture Mapping}
+\begin{itemize}
+    \item Texture is parameterized by $(u,v) \in [0,1]^2$
+    \item A texture element has size $(\frac{1}{width}, \frac{1}{height})$
+\end{itemize}
+Then we need to map texture to the object:
+\begin{itemize}
+    \item Planar Mapping: drop z-coordinate, $(u,v) = (\frac{x}{W}, \frac{y}{H})$ 
+    \item Cylindrical mapping: $r, \theta, z$, $(u,v) = (\frac{\theta}{2\pi}, z)$  
+    \item Spherical mapping: $(u,v) = (\frac{\theta}{2\pi}, (\phi + \frac{\pi}{2})/\pi)$ where $0 \leq \theta \leq 2\pi,$ and $-\frac{\pi}{2} \leq \phi \leq \frac{\pi}{2}$
+    \item Cube mapping: each side of the cube has a texture  
+\end{itemize}
+
+Another two options are:
+\begin{itemize}
+    \item Unfolding the surface into one big
+    \item Texture atlas: unfolding but in different parts
+
+\end{itemize}
+Now we need to assign a colour when we know which texel it maps to
+\begin{itemize}
+    \item Nearest neighbour: take colour of its nearest neighbour
+    \item Interpolation: bilinear or barycentric interpolation in image space
+\end{itemize}
+
+We can have anti-aliasing, so we need 
+\subsection*{Texture Filtering}
+\begin{itemize}
+    \item Magnification problem: solve by bilinear interpolation in \textbf{texture space} 
+    \item Minification problem: a pixel maps to an area in texture space 
+\end{itemize}
+
+\begin{itemize}
+    \item Mip Maps: recursively average over $2\times 2$ neighbours from the previous levels. Resample in each level and linearly interpolate from the two levels
+    \item Rip map: like mip map but non-uniformly scaled versions of input texture
+    \item Summed Area Table: sum columns and then sum rows to get the values of a certain area
+\end{itemize}
+
+Other texturing methods:
+\begin{itemize}
+    \item Bump mapping: perturb the normal
+    \item Normal Mapping
+    \item Displacement Mapping: perturb the surface geometry
+    \item Environment mapping: model an environment
+    \item Procedural texture
+    \item Textured billboard
+\end{itemize}
+
+\section{Ray Tracing}
+Whitted ray-tracing algorithm
+\begin{itemize}
+    \item For each pixel trace a primary ray to the first visible surface
+    \item For each intersection create secondary rays: shadow ray to each light source, reflected ray, and refracted ray
+\end{itemize}
+
+Law of reflection $\eta_i = \eta_r$ and $\gamma_i sin \theta_i = \gamma_t sin \theta_t$  
+
+\subsection{Intersection}
+We can intersect with the following objects:
+\begin{itemize}
+    \item Sphere: $x^2 + y^2 + z^2 = r^2$
+    \item Quadrilaterals/plane: $Ax + By + Cz + D = 0 $  
+    \item Disk $x^2 + y^2 - 1 \leq 0$ 
+    \item Cylinders: $x^2 +y^2 - 1 =0$ 
+    \item Cones: $x^2 + y^2 - z^2 = 0$ 
+\end{itemize}
+
+\subsection{Advanced Ray Tracing}
+\subsection*{Acceleration Techniques:}
+\begin{itemize}
+    \item Render at eye to see first hit locations
+    \item Bounding volumes
+\end{itemize}
+\subsection*{Constructive solid geometry}
+Compute intersection intervals between the ray and primitive, then we can either AND, OR, or get the DIFFERENCE.
+
+\subsection*{Antialiasing}
+\begin{itemize}
+    \item Supersampling: multiple rays and average the result
+    \item Adaptive sampling: sample only when the image changes in that area
+    \item Stochastic sampling: randomly sample. Might waste resources if too close, thus N-Rook sampling, Jittered Sampling or Poisson Disk Sampling
+\end{itemize}
+
+Using distributed ray tracing, we are often interested in implementing the following things:
+
+\begin{itemize}
+    \item Motion blur: shoot multiple rays from the eye in each pixel to the same point at different times. 
+    \item Depth of field: We can fake distribution through a lens by choosing a point on a
+    finite aperture and tracing through the “infocus point”.
+    \item Gloss \& Translucency: trace additional rays from where reflection or refraction hits.
+    \item Soft shadows: model light source as volume and shoot several light rays from the light source. Then take average of the lighting
+\end{itemize}
+
+Sampling methods:
+\begin{itemize}
+    \item Random sampling, get n coordinates $(x_i, y_i) \in [0,1]^2$ 
+    \item Regular sampling: even spacing between point 
+    \item Jittered Sampling: partition in $n\times n$ equal squares and choose a point randomly in each square
+    \item Poisson Disk Sampling: generate a sequence of samples and reject if they are too close
+    \item N-Rooks sampling: make a $n\times n$ grid annd take sample in each row and column.  
+\end{itemize}
+
+\section{Extra shadow techniques}
+\begin{enumerate}
+    \item Ray tracing: model the light source as an object and shine multiple lights from the source
+    \item Planar shadows: draw the object projected to the ground. Issue is we have no self shadows or shadows on other objects.
+    \item Shadow maps/texture: render map using depth from the light source. Can be done using hardware. Issue 1: point to shadow is outside of fov $\to$ cubical shadow map or use only spot lights. 2: too much self-shadowing $ \to$ add bias. 3: shadow map aliasing.  
+\end{enumerate}
+
+
+\section{Volume Visualization}
+\subsection*{Marching Cubes}
+\begin{itemize}
+    \item Usually draw an index first, where (1n) when $value \geq iso-value$, (0ut) otherwise 
+    \item Then we have a vertex on every 0-1 edge of the triangle.
+    \item Linearly interpolate to get the indices. $(value - D(i)) / (D(i+1) - D(i))$, where i is the 0 value and i+1 1 value.  
+\end{itemize}
+
+
+\section{Animation Techinques}
+\subsection*{Keyframing}
+We interpolate the parameters between two different points:
+\begin{itemize}
+    \item Linear interpolation: very unnatural, but easy
+    \item Polynomial interpolation: suffers from overfitting
+    \item Spline interpolation: may cause interpenetration
+\end{itemize}
+Another issue we have is interpolating orientations:
+\begin{itemize}
+    \item Ambiguous, rotation in one direction or the other direction?
+    \item During interpolation the object can change size
+    \item Euler Angles can be ambiguous
+    \item Use quaternions to interpolate: $\textbf{q} = (cos(\frac{\theta}{2}), sin(\frac{\theta}{2}) \textbf{a} ) $. Where alpha is the vector around which we rotate
+\end{itemize}
+
+Now we can use either of the following to interpolate quaternions:
+\begin{itemize}
+    \item lerp: $lerp(\textbf{q}_0, \textbf{q}_1, t) = \textbf{q}_0 (1-t) + \textbf{q}_1 t$
+    \item slerp: $slerp(\textbf{q}_0, \textbf{q}_1, t) = \frac{\textbf{q}_0 sin((1-t)\omega) + \textbf{q}_1 sin(t \omega) }{sin(\omega)}$, where $\omega = arccos(\textbf{q}_0 \cdot \textbf{q}_1  )$   
+\end{itemize}
+
+
+\subsection{Character Animations}
+\begin{itemize}
+    \item Skeletal animations: we create articulated models (skeleton and bones) and then we interpolate the joint angles. Can apply \textbf{rigging} which is a skeleton of bones and it associates with some portion of the surface model (like skin).
+    \item Forward kinematics: the portions of body parts as a function of joint angles
+    \item Inverse Kinematics: adjust the end position, and IK calculates the joint parameters.
+\end{itemize}
+
+\subsection{Motion Capture}
+\begin{itemize}
+    \item Optical motion capture: reflective markers on actor's body. Cameras capture the motion, very easily occluded. Need a large studio for capturing outdoor movements.
+    \item Magnetic motion capture: no occlusion, but not accurate and capturing volume is very small
+    \item Inertial trackers: measure the rate of change in angular velocity and translational acceleration. Error increases by time.
+    \item Mechanical motion capture: very accurate but interferes with the actor
+\end{itemize}
+
+Motion editing: 
+\begin{itemize}
+    \item Motion warping: distort the motion curve to satisfy some constraint
+    \item Motion blending: blend motion A and B after each other into each other
+\end{itemize}
+
+Facial animation:
+\begin{itemize}
+    \item Parametric model: %TODO
+    \item Mass and spring model: %TODO
+\end{itemize}
+
+We can use a marker-based approach, where we capture using markers, or markerless approach where we track the face features.
+
+Crowd animation: to simulate crowds or movements of big group of things
+\begin{itemize}
+    \item Agent based method: motion computed seperately for each individual. They interact with each other by individual decisions
+    \item Global methods or continuum crowds: integrate global path planning to simulate phenomena, collision avoidance for massive crowd
+\end{itemize}
+
+\subsection{Physically based animation}
+\begin{itemize}
+    \item Particle system: use differential equations or particle dynamics (F=ma) to model the dynamics.
+\end{itemize}
+
+Application includes: fuzzy phenomena, cloth simulation (spring and mass model), hair and human skin simulations.
+
+Other technique: \textbf{Finite element methods:} technique to find approximate solutions. Usually high quality and used in engineering. Only approximate and has inherent errors.
+
+
+\section{VR and AR}
+Example of \textbf{input devices} : 
+Joystick and Gamepad, handheld controllers for VR, microphone, camera, steering wheel etc, or evcen tracking devices. 
+
+\textbf{Other forms}  include:
+Device direction sensing devices (tilt sensors or electric compasses), device motion sensors (accelerometers). 
+
+For \textbf{body posture and motion sensing} : kinect or time of flight. 
+
+Then we can also have\textbf{ hand tracking} : gloves, markers, or depth cameras
+
+\textbf{Eye tracking:}  measure the point of gaze or motion of an eye relative to the head.
+
+\textbf{Locomotion devices:} sensor our walking, could be anything from motion capture to treadmills
+\begin{itemize}
+    \item Outside-in: use external cameras to track user's position. (+-) precise and fast, allows weaker hardware, works in the dark
+    \item Inside-out: without any external cameras to track user. Usually camera is mounted on the headset. (+-) no need for an expensive setup, need less hardware, works everywhere.
+\end{itemize}
+
+\textbf{Brain-Computer Interface:} measure EE signals
+
+\subsection*{Outputs}
+\begin{itemize}
+    \item Displays
+    \item Head-mounted display: but FOV is about 110 degree vs our 180 deg. Possible solutions: put display closer, enlarge the display
+    \item Audio output: earphones, speakers (5.1 vs 7.1). We have mono, stereo, surround (binaural) etc.
+    \item Haptics: tactile feedback. Vibration cues (force feedback), resistive feedback (air bladders or actuators), gloves, pen-based device, or haptic station
+    \item Scent synthesis: odor release systems
+    \item Motion sumlators: flight training, racing games, etc.
+    \item Time: latency time must be low. Longer than 20ms feels like lag
+\end{itemize}
+
+General applications:
+Virtual games, scientific visualizations, virtual heritage, google earth, training.
+
+
+\subsection*{Augmented Reality}
+Overlay computer generated object on physical objects. Characterized by: combining real and virtual objects in a real environment, real time interaction, register real and virtual objects together.
+
+\begin{itemize}
+    \item Weak AR: imprecise or no registration with environment, limited interaction, handheld
+    \item Strong AR: accurate redgistration with environment, natural interaction, head-mounted see through glasses
+\end{itemize}
+
+We need some tracking methods to have some interaction. Also called 3D tracking:
+
+\begin{itemize}
+    \item Fiducial marker based AR
+    \item Plane object based AR
+    \item 3D object based tracking
+    \item Environment based tracking
+\end{itemize}
+
+Since we usually have some limitations, we can solve some issues by using multiple RGB cameras, depth sensor, ambient light sensor etc.
+
+How to achieve AR
+\begin{itemize}
+    \item Spatial AR: project on real surfaces. Need hardware setup and calibration. Doesn't support much interaction and need a strong projector.
+    \item See through AR: user needs to wear a display device. Doesn't support many simultaneous users and interaction is mostly screen based. Other way is using glass-based AR, but they have bad resolutions, bad battery life, and small FOV.
+\end{itemize}
+
+\textbf{Mixed reality:} combination of VR and AR, \textbf{augmented VR:} incorporates selective portions of the real world into the virtual world, can be implemented using a camera on the VR headset.
+
+General applications:
+Face filters, assistant, product review, games.
+
+
+
+\end{document}
+

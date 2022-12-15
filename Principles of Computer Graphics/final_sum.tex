@@ -200,6 +200,8 @@ Sampling methods:
 \end{itemize}
 
 
+
+
 \section{Animation Techinques}
 \subsection*{Keyframing}
 We interpolate the parameters between two different points:
@@ -219,7 +221,8 @@ Another issue we have is interpolating orientations:
 Now we can use either of the following to interpolate quaternions:
 \begin{itemize}
     \item lerp: $lerp(\textbf{q}_0, \textbf{q}_1, t) = \textbf{q}_0 (1-t) + \textbf{q}_1 t$
-    \item slerp: $slerp(\textbf{q}_0, \textbf{q}_1, t) = \frac{\textbf{q}_0 sin((1-t)\omega) + \textbf{q}_1 sin(t \omega) }{sin(\omega)}$, where $\omega = arccos(\textbf{q}_0 \cdot \textbf{q}_1  )$   
+    \item slerp: $slerp(\textbf{q}_0, \textbf{q}_1, t) = \frac{\textbf{q}_0 sin((1-t)\omega) + \textbf{q}_1 sin(t \omega) }{sin(\omega)}$, \\
+    where $\omega = arccos(\textbf{q}_0 \cdot \textbf{q}_1  )$   
 \end{itemize}
 
 
